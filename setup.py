@@ -16,7 +16,7 @@ with open("README.md", encoding="utf-8") as f:
  
 setup(
   name='Telegram-Notify',
-  version='1.0.1',
+  version='1.0.2',
   description='Telegram Bot Notifier',
   long_description=long_description,
   long_description_content_type='text/x-rst',
