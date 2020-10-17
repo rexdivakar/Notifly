@@ -17,14 +17,12 @@ class BotHandler:
         method = 'getUpdates'
         params = {'timeout': timeout, 'offset': offset}
         resp = requests.get(self.api_url + method, params)
-        result_json = resp.json()['result']
-        return result_json
+        return resp.json()['result']
 
     def push_notification_msg(self, chat_id, text):
         params = {'chat_id': chat_id, 'text': text, 'parse_mode': 'HTML'}
         method = 'sendMessage'
-        resp = requests.post(self.api_url + method, params)
-        return resp
+        return requests.post(self.api_url + method, params)
 
     def send_message(self, msg):
         fetch_updates = self.get_updates()
