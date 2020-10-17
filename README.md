@@ -13,3 +13,13 @@
 Telegram Bot Created to push notifications during an event trigger !!
 
 
+## Code Usage
+
+pip install notifly
+
+from telegram import notifly
+
+bot=notifly.BotHandler('BOT TOKEN')
+
+bot.send_message('your message')
+
