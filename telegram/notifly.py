@@ -33,7 +33,7 @@ class BotHandler:
         update_id = fetch_updates[0]['update_id']
         return self.push_notification_msg(chat_id=chat_id, text=msg)
 
-    def send_file(self,img_path):
+    def send_image(self,img_path):
         fetch_updates = self.get_updates()
         chat_id = fetch_updates[0]['message']['chat']['id']
         method = 'sendPhoto?'+'chat_id='+str(chat_id)
