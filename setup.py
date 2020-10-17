@@ -15,8 +15,8 @@ with open("README.md", encoding="utf-8") as f:
     long_description = f.read()
  
 setup(
-  name='Telify',
-  version='2.0.3',
+  name='Telegram-Notify',
+  version='3.0.1',
   description='Telegram Bot Notifier',
   long_description=long_description,
   long_description_content_type='text/x-rst',
@@ -25,8 +25,7 @@ setup(
   author_email='rexdivakar@hotmail.com',
   license='MIT', 
   classifiers=classifiers,
-  keywords='Telegram,Telegram-Bot,Telegram-notification', 
-  packages=["telegram"],
-  include_package_data=True,
+  keywords='Telegram', 
+  packages=['telegram'],
   install_requires=[''] 
 )
