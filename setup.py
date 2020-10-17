@@ -15,7 +15,7 @@ with open("README.md", encoding="utf-8") as f:
     long_description = f.read()
  
 setup(
-  name='Telegram-Notify',
+  name='Telegram-Notify-Bot',
   version='1.0',
   description='Telegram Bot Notifier',
   long_description=long_description,
