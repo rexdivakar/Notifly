@@ -26,6 +26,7 @@ setup(
   license='MIT', 
   classifiers=classifiers,
   keywords='Telegram,Telegram-Bot,Telegram-notification', 
-  packages=find_packages(),
+  packages=["telegram"],
+  include_package_data=True,
   install_requires=[''] 
 )
