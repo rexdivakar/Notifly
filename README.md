@@ -7,16 +7,28 @@
 <p align="center">
 <img src="others\bot.png" width="200" alt="Logo">
 
-## About the package
+# what is the purpose of this bot ?
 
+This bot was created to push notifications during an event trigger !!
 
-Telegram Bot Created to push notifications during an event trigger !!
+## How to install and get started 
 
+Termux :
+pkg install python3 
+pip3 install notifly
 
-## Code Usage
+Ubuntu/Debian
+sudo apt install python3-pip
+pip3 install notifly
 
-pip install notifly
+Arch
 
+sudo pacman -S python3-pip
+pip3 install notifly
+
+# Be aware this may take a while depending on your network speed
+
+# Documentation
 from telegram import notifly
 
 bot=notifly.BotHandler('BOT TOKEN')
