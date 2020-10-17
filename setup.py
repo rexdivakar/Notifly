@@ -12,7 +12,7 @@ setup(
   name='Telegram-Notify',
   version='0.0.1',
   description='Telegram Bot Notifier',
-  long_description=open('README.txt').read() + '\n\n' + open('CHANGELOG.txt').read(),
+  long_description=open('README.md').read() + '\n\n' + open('CHANGELOG.txt').read(),
   url='',  
   author='Divakar R',
   author_email='rexdivakar@hotmail.com',
