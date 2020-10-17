@@ -10,7 +10,7 @@ classifiers = [
  
 setup(
   name='Telegram-Notify',
-  version='0.0.1',
+  version='0.0.2',
   description='Telegram Bot Notifier',
   long_description=open('README.md').read() + '\n\n' + open('CHANGELOG.txt').read(),
   url='',  
