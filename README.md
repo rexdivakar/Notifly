@@ -1,7 +1,8 @@
 # Telegram-Notify
 
-![Python application](https://github.com/rexdivakar/Telegram-Notifly/workflows/Python%20application/badge.svg)
+![Build](https://github.com/rexdivakar/Telegram-Notifly/workflows/Python%20application/badge.svg)
 ![Upload Python Package](https://github.com/rexdivakar/Telegram-Notifly/workflows/Upload%20Python%20Package/badge.svg)
+[![Version](https://img.shields.io/pypi/v/notifly.svg)](https://pypi.org/project/notifly/)
 
 
 <p align="center">
