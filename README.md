@@ -11,6 +11,7 @@
 # what is the purpose of this bot ?
 
 This bot was created to push notifications during an event trigger !!
+*Stay tuned for library updates*
 
 ## How to install and get started 
 
