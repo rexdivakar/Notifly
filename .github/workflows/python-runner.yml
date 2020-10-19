@@ -7,13 +7,9 @@ on:
     branches: 
     - master
     - 'releases/**'
-
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.8
@@ -34,9 +30,6 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
         
-    - name: Python Runner
-      run: |
-        python *.py
     - name: Generate coverage report
       run: |
           pip install pytest
