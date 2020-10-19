@@ -27,7 +27,7 @@ Telegram Bot to push notifications during an event trigger.
 * [Python][1]
 
 ## Install the package
-Run the following terminal commans to install the package on the given distros.
+Run the following terminal commands to install the package on the given distros.
 * Termux :
 ```
 pkg install python3 
@@ -67,6 +67,31 @@ pip3 install -r requirements.txt
 ```
 pip3 install requests==2.20.0
 ```
+### Working of the tool
+To see how the tool works, create a [telegram bot][2] and run the _sample code_.
+1. Creating the [telegram bot][0]
+   1. Open Telegram messenger, sign in to your account or create a new one.
+   1. Enter _@Botfather_ in the search tab and choose this bot.<br>*Note, official Telegram bots have a blue checkmark beside their name*
+   1. Click _Start_ to activate BotFather bot.
+   1. Choose or type _/newbot_ and send it.
+   1. Choose a name for the bot, the bot can be found by its username in searches. The username must be unique and end with the word _bot_.
+   1. After choosing a suitable name for the bot, the bot is created. We receive a message with a link to the bot _t.me/<bot_username>_, recommendations to set up a profile picture, description, and a list of commands to manage your new bot.
+1. Run sample code
+```python
+from telegram import notifly
+
+bot=notifly.BotHandler('1317654102:AAHhNLXy_vqJWDEf0Hu7svfw-DkVFmQuUG0')
+text = input("Enter text message : ")
+print(bot.send_message(text))
+opt_image = input("Do you want to send image ?")
+if(opt_image=='y' or opt_image=='Y'):
+    img_path = input("Enter full image path : ")
+    bot.send_image(img_path)
+```
+Enter the _bot token_ here.
+```
+bot=notifly.BotHandler('bot_token')
+```
 ## Contributing
 1. Fork the Project
 1. Create your Feature Branch (git checkout -b feature/aesEncryptionCode)
@@ -87,5 +112,7 @@ pip3 install requests==2.20.0
 [issues-url]: https://github.com/rexdivakar/Telegram-Notifly/issues
 [license-shield]: https://img.shields.io/github/license/rexdivakar/Telegram-Notifly.svg?style=flat-square
 [license-url]: https://github.com/rexdivakar/Telegram-Notifly/blob/master/LICENSE.txt
+[0]:https://core.telegram.org/bots
 [1]:https://www.python.org/
+[2]:https://telegram.org/blog/bot-revolution
 [4]:https://www.python.org/downloads/
