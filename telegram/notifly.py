@@ -5,6 +5,7 @@ import sys
 
 token = ''  # Token of your bot
 
+
 class BotHandler:
     def __init__(self, token):
         self.token = token
@@ -19,14 +20,20 @@ class BotHandler:
         result_json = resp.json()['result']
         return result_json
 
-    def push_notification_msg(self, chat_id, text):
-        params = {'chat_id': chat_id, 'text': text, 'parse_mode': 'HTML'}
-        method = 'sendMessage'
-        resp = requests.post(self.api_url + method, params)
-        return resp
-
-    def send_message(self,msg):
+    def send_message(self, msg):
         fetch_updates = self.get_updates()
         chat_id = fetch_updates[0]['message']['chat']['id']
         update_id = fetch_updates[0]['update_id']
-        return self.push_notification_msg(chat_id=chat_id, text=msg)
+        
+        params = {'chat_id': chat_id, 'text': msg, 'parse_mode': 'HTML'}
+        method = 'sendMessage'
+        return requests.post(self.api_url + method, params)
+
+    def send_image(self,img_path):
+        fetch_updates = self.get_updates()
+        chat_id = fetch_updates[0]['message']['chat']['id']
+        method = 'sendPhoto?'+'chat_id='+str(chat_id)
+        
+        files ={'photo':open(img_path, 'rb')}
+        
+        resp = requests.post(self.api_url+method,files=files)

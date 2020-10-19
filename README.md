@@ -3,13 +3,10 @@
 ![Discord](https://img.shields.io/discord/760088481224851476?label=DISCORD&logo=discord&logoColor=green&style=for-the-badge)
 ![PyPI](https://img.shields.io/pypi/v/notifly?logo=github&style=for-the-badge)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/notifly?color=green&style=for-the-badge&logo=github)
-![Python application](https://github.com/rexdivakar/Telegram-Notifly/workflows/Python%20application/badge.svg)
-![Upload Python Package](https://github.com/rexdivakar/Telegram-Notifly/workflows/Upload%20Python%20Package/badge.svg)
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
+
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rexdivakar/telegram-notifly/Python%20application?&style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rexdivakar/telegram-notifly/Upload%20Python%20Package?label=Upload%20Python%20Package&style=flat-square)
+
 
 <p align="center">
 <img src="others\bot.png" width="200" alt="Logo">
