@@ -12,13 +12,17 @@ class BotHandler:
         self.api_url = "https://api.telegram.org/bot{}/".format(token)
 
     #url = "https://api.telegram.org/bot<token>/"
+    
 
     def get_updates(self, offset=0, timeout=30):
         method = 'getUpdates'
         params = {'timeout': timeout, 'offset': offset}
         resp = requests.get(self.api_url + method, params)
-        result_json = resp.json()['result']
-        return result_json
+        try:
+            result_json = resp.json()['result']
+            return result_json
+        except:
+            return '404 error'
 
     def send_message(self, msg,notification):
         fetch_updates = self.get_updates()
@@ -35,7 +39,19 @@ class BotHandler:
         method = 'sendPhoto?'+'chat_id='+str(chat_id)
         
         files ={'photo':open(img_path, 'rb')}
-        
         resp = requests.post(self.api_url+method,files=files)
+
+
+    def send_document(self,file_path):
+        fetch_updates = self.get_updates()
+        chat_id = fetch_updates[0]['message']['chat']['id']
+        method = 'sendDocument?'+'chat_id='+str(chat_id)
+        
+        files ={'document':open(file_path, 'rb')}
+        resp = requests.post(self.api_url+method,files=files)
+        
+
+    
+
 
 
