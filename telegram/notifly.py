@@ -29,13 +29,13 @@ class BotHandler:
         method = 'sendMessage'
         return requests.post(self.api_url + method, params)
 
-    def send_image(self,img_path,notification):
+    def send_image(self,img_path):
         fetch_updates = self.get_updates()
         chat_id = fetch_updates[0]['message']['chat']['id']
+        method = 'sendPhoto?'+'chat_id='+str(chat_id)
         
-        files={'photo':open(img_path, 'rb')}
+        files ={'photo':open(img_path, 'rb')}
         
-        method = 'sendPhoto?'+'chat_id='+str(chat_id)+str(notification)
-
-
         resp = requests.post(self.api_url+method,files=files)
+
+
