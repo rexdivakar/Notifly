@@ -20,20 +20,22 @@ class BotHandler:
         result_json = resp.json()['result']
         return result_json
 
-    def send_message(self, msg):
+    def send_message(self, msg,notification):
         fetch_updates = self.get_updates()
         chat_id = fetch_updates[0]['message']['chat']['id']
-        update_id = fetch_updates[0]['update_id']
+        # update_id = fetch_updates[0]['update_id']
         
-        params = {'chat_id': chat_id, 'text': msg, 'parse_mode': 'HTML'}
+        params = {'chat_id': chat_id, 'text': msg, 'parse_mode': 'HTML','disable_notification':notification}
         method = 'sendMessage'
         return requests.post(self.api_url + method, params)
 
-    def send_image(self,img_path):
+    def send_image(self,img_path,notification):
         fetch_updates = self.get_updates()
         chat_id = fetch_updates[0]['message']['chat']['id']
-        method = 'sendPhoto?'+'chat_id='+str(chat_id)
         
-        files ={'photo':open(img_path, 'rb')}
+        files={'photo':open(img_path, 'rb')}
         
+        method = 'sendPhoto?'+'chat_id='+str(chat_id)+str(notification)
+
+
         resp = requests.post(self.api_url+method,files=files)
