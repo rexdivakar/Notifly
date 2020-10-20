@@ -19,8 +19,7 @@ class BotHandler:
         params = {'timeout': timeout, 'offset': offset}
         resp = requests.get(self.api_url + method, params)
         try:
-            result_json = resp.json()['result']
-            return result_json
+            return resp.json()['result']
         except:
             return '404 error'
 
