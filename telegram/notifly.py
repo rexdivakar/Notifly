@@ -1,7 +1,9 @@
 # -*- coding: UTF8 -*-
+from os import path
 import requests
 import datetime
 import sys
+import json
 
 token = ''  # Token of your bot
 
@@ -37,3 +39,29 @@ class BotHandler:
         files ={'photo':open(img_path, 'rb')}
         
         resp = requests.post(self.api_url+method,files=files)
+        
+    def receive_messages(self):
+        fetch_updates = self.get_updates()
+        messages_path = './messages.json'
+            
+        # Store to csv file
+        try:
+            read_file = open(messages_path, 'r')
+            messages = json.load(read_file)
+
+            with open(messages_path, 'w') as json_file:
+                for update in fetch_updates:
+                    message_exist = any(message['update_id'] == update['update_id'] for message in messages)
+                    
+                    if (message_exist == False):
+                        messages.append(update)
+
+                json.dump(messages, json_file, indent=4, separators=(", ", ": "), sort_keys=True)
+                
+            read_file.close()
+            
+            return messages
+        except:
+            print('Unexpected error:', sys.exc_info())
+            
+            return []
