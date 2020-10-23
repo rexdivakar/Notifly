@@ -2,7 +2,7 @@
 import requests
 import datetime
 import sys
-
+import os
 token = ''  # Token of your bot
 
 
@@ -50,9 +50,58 @@ class BotHandler:
         
         files ={'document':open(file_path, 'rb')}
         resp = requests.post(self.api_url+method,files=files)
-        
 
-    
+    def download_files(self):
+        fetch_updates = self.get_updates()
+        for update in fetch_updates:
+            fileName = ''
+            media = ['document', 'photo', 'video', 'voice']
+            # Check if update message contains any of the media keys from above
+            intersection = list(set(update['message'].keys()) & set(media))
+            if intersection:
+                mediaKey = intersection[0]
 
+                # Determine fileId. For photos multiple versions exist. Use the last one.
+                if mediaKey == 'photo':
+                    fileId = update['message'][mediaKey][-1]['file_id']
+                else:
+                    fileId = update['message'][mediaKey]['file_id']
 
+                if mediaKey == 'document':
+                    # In a document, it's possible to use the original name.
+                    fileName = update['message'][mediaKey]['file_name']
+                self.get_file(fileId, fileName)
 
+    def get_file(self, file_id, fileName=''):
+        """"Follow the getFile endpoint and download the file by file_id.
+        A fileName can be given, else a file_unique_id gibberish name will be used.
+
+        See also: https://core.telegram.org/bots/api#getfile
+        """
+        method = 'getFile?' + 'file_id=' + str(file_id)
+        res = requests.post(self.api_url + method, file_id)
+        try:
+            filePath = res.json()['result']['file_path']
+            # Determine the fileName. Use modified filePath if none given.
+            if not fileName:
+                fileName = filePath[filePath.rfind('/')+1:]
+        except (KeyError, ValueError):
+            return "500 - Failed parsing the file link from API response."
+
+        if not os.path.exists(self.dirDownloads):
+            os.mkdir(self.dirDownloads)
+
+        localPath = os.path.join(self.dirDownloads, fileName)
+
+        # Download file as stream.
+        res = requests.get(self.file_url + filePath, stream=True)
+        if res.status_code == 200:
+            try:
+                with open(localPath, 'wb') as f:
+                    for chunk in res:
+                        f.write(chunk)
+            except (IOError):
+                pass
+            return '200 - {} written.'.format(localPath)
+        else:
+            return '404 - Error accessing {}'.format(filePath)
