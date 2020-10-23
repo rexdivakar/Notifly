@@ -7,9 +7,11 @@ token = ''  # Token of your bot
 
 
 class BotHandler:
-    def __init__(self, token):
+    def __init__(self, token, dirDownloads='./downloads'):
         self.token = token
         self.api_url = "https://api.telegram.org/bot{}/".format(token)
+        self.file_url = "https://api.telegram.org/file/bot{}/".format(token)
+        self.dirDownloads = dirDownloads
 
     #url = "https://api.telegram.org/bot<token>/"
     
