@@ -113,12 +113,3 @@ git push origin feature/mybranch
 [1]:https://www.python.org/
 [2]:https://telegram.org/blog/bot-revolution
 [4]:https://www.python.org/downloads/
-[img1]:others/1.png
-[img2]:others/2.png
-[img3]:others/3.png
-[img4]:others/4.png
-[img5]:others/5.png
-[img6]:others/6.png
-[img7]:others/7.png
-[img8]:others/8.png
-[img9]:others/9.png
