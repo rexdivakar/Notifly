@@ -19,7 +19,7 @@ setup(
   version='1.1.3',
   description='Telegram Bot Notifier',
   long_description=read_file,
-  long_description_content_type='text/x-rst',
+  long_description_content_type='text/markdown',
   url='https://github.com/rexdivakar/Telegram-Notifly',  
   author='Divakar R',
   author_email='rexdivakar@hotmail.com',
