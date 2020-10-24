@@ -16,7 +16,7 @@ with open("README.md", encoding="utf-8") as f:
  
 setup(
   name='notifly',
-  version='1.1.3',
+  version='1.1.4',
   description='Telegram Bot Notifier',
   long_description=read_file,
   long_description_content_type='text/markdown',
