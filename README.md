@@ -68,22 +68,7 @@ pip3 install requests==2.20.0
 ```
 ### Working of the tool
 To see how the tool works, create a [telegram bot][2].
-1. ***Creating the [telegram bot][0]***
-   1. Open Telegram messenger, sign in to your account or create a new one.
-   1. Enter _@Botfather_ in the search tab and choose this bot.<br>*Note, official Telegram bots have a blue checkmark beside their name*.<br>
-   ![image1][img1]
-   1. Click _Start_ to activate BotFather bot.<br>
-   ![image2][img2]
-   1. Choose or type _/newbot_ and send it.<br>
-   ![image3][img3]
-   1. Choose a name for the bot, the bot can be found by its username in searches. The username must be unique and end with the word _bot_.<br>
-1. ***Getting the bot API token***
-   * **Newly created bot**<br>
-   ![image4][img4]
-   * **Already existing bot**<br>
-   ![image5][img5]
-   ![image6][img6]
-   ![image7][img7]
+
 1. ***Run sample code***
 ```python
 from telegram import notifly
@@ -97,8 +82,7 @@ if(opt_image=='y' or opt_image=='Y'):
     img_path = input("Enter full image path : ")
     bot.send_image(img_path)
 ```
-![image8][img8]
-![image9][img9]
+
 ## Contributing
 1. Fork the Project
 1. Create your Feature Branch 
