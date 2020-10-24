@@ -19,7 +19,7 @@ setup(
   version='1.1.3',
   description='Telegram Bot Notifier',
   long_description=long_description,
-  long_description_content_type='text/x-rst',
+  long_description_content_type='text',
   url='',  
   author='Divakar R',
   author_email='rexdivakar@hotmail.com',
