@@ -8,9 +8,6 @@
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rexdivakar/telegram-notifly/Upload%20Python%20Package?label=Upload%20Python%20Package&style=flat-square)
 
 
-<p align="center">
-<img src="others\bot.png" width="200" alt="Logo">
-
 ## Table of Contents
 * [About the package](#about-the-package)
   * [Built With](#built-with)
