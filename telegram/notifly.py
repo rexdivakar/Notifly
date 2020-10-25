@@ -39,7 +39,6 @@ class BotHandler:
         try:
             return resp.json()['result']
         except:
-            print('about to fail')
             return '404 error'
 
     def send_message(self, msg,notification):
