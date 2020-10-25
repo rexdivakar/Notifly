@@ -5,7 +5,7 @@ import sys
 from tqdm import tqdm
 import time
 
-token = '1347043184:AAGmj_-VlRsIyQGSTTTcSFMhBJh3-aPQkto'  # Token of your bot
+token = ''  # Token of your bot
 
 class BotHandler:
     def __init__(self, token):
@@ -36,10 +36,7 @@ class BotHandler:
         method = 'getUpdates'
         params = {'timeout': timeout, 'offset': offset}
         resp = requests.get(self.api_url + method, params)
-        print(resp)
         try:
-            print(f'about to return {resp}')
-            print(f'result data is {resp.json()["result"]}')
             return resp.json()['result']
         except:
             print('about to fail')
@@ -47,7 +44,6 @@ class BotHandler:
 
     def send_message(self, msg,notification):
         fetch_updates = self.get_updates()
-        print(fetch_updates)
         chat_id = fetch_updates[0]['message']['chat']['id']
         # update_id = fetch_updates[0]['update_id']
         
