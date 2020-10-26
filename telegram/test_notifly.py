@@ -4,7 +4,8 @@ import os
 import tempfile
 from telegram import notifly
 
-bot = notifly.BotHandler('1327718118:AAHX2sbticgBQpnrwhQDSyqY9lvKVWQaJFw')
+token = ''
+bot = notifly.BotHandler(token)
 
 
 class NotiflyTestCase(TestCase):
