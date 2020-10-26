@@ -12,20 +12,20 @@ classifiers = [
 
 # Get the long description from the README file
 with open("README.md", encoding="utf-8") as f:
-    long_description = f.read()
+    read_file = f.read()
  
 setup(
   name='notifly',
-  version='1.1.2',
-  description='Telegram Bot Notifier',
-  long_description=long_description,
-  long_description_content_type='text/x-rst',
-  url='',  
+  version='1.1.5',
+  description='Simple Bot Notifier',
+  long_description=read_file,
+  long_description_content_type='text/markdown',
+  url='https://github.com/rexdivakar/Telegram-Notifly',  
   author='Divakar R',
   author_email='rexdivakar@hotmail.com',
   license='MIT', 
   classifiers=classifiers,
-  keywords='Telegram', 
+  keywords='Bot Notification', 
   packages=['telegram'],
-  install_requires=[''] 
+  install_requires=['requests'] 
 )

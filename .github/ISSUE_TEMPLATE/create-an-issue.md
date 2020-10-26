@@ -30,6 +30,12 @@ Please add/delete options that are not relevant.
 
 :star2: Star it :fork_and_knife:Fork it :handshake: Contribute to it!
 
+## Maintainers 
+
+#### Divakar -- Discord id (root#5998)
+#### Sanchit -- Discord id (sanchit#5988)
+
 Discord server  - https://discord.gg/e47wmTW
+
 
 Happy Coding,
