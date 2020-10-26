@@ -1,6 +1,7 @@
 # -*- coding: UTF8 -*-
 import json
 import os
+from tqdm import tqdm
 
 import requests
 
@@ -15,6 +16,23 @@ class BotHandler:
         self.dirDownloads = dirdownloads
 
     # url = "https://api.telegram.org/bot<token>/"
+
+    # Progress bar method to call,
+    # response is the http post sent
+    # data_type is the type of data being send
+    def create_progress_bar(self, response, data_type):
+        total = int(response.headers.get('content-length'))
+
+        if data_type == 'img':
+            progress_bar = tqdm(total=total, unit=' bits', desc='Uploading img')
+            for data in response.iter_content(512):
+                progress_bar.update(len(data))
+            progress_bar.close()
+        else:
+            progress_bar = tqdm(total=total, unit=' bits', desc='Uploading Doc')
+            for data in response.iter_content(512):
+                progress_bar.update(len(data))
+            progress_bar.close()
 
     def get_updates(self, offset=0, timeout=30):
         method = 'getUpdates'
@@ -40,7 +58,11 @@ class BotHandler:
         method = 'sendPhoto?' + 'chat_id=' + str(chat_id)
 
         files = {'photo': open(img_path, 'rb')}
-        return requests.post(self.api_url + method, files=files)
+
+        resp = requests.post(self.api_url + method, files=files,stream=True)
+        self.create_progress_bar(resp, 'img')
+        print("Complete.")
+        # return requests.post(self.api_url + method, files=files)
 
     def send_document(self, file_path):
         fetch_updates = self.get_updates()
@@ -48,7 +70,11 @@ class BotHandler:
         method = 'sendDocument?' + 'chat_id=' + str(chat_id)
 
         files = {'document': open(file_path, 'rb')}
-        return requests.post(self.api_url + method, files=files)
+
+        resp = requests.post(self.api_url + method, files=files,stream=True)
+        self.create_progress_bar(resp, 'doc')
+        print("Complete.")
+        # return requests.post(self.api_url + method, files=files)
 
     def download_files(self):
         fetch_updates = self.get_updates()
