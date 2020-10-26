@@ -8,8 +8,8 @@
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rexdivakar/telegram-notifly/Upload%20Python%20Package?label=Upload%20Python%20Package&style=flat-square)
 
 
-<p align="center">
-<img src="others\bot.png" width="200" alt="Logo">
+<p align="center">	<p align="center">
+<img src="https://raw.githubusercontent.com/rexdivakar/Telegram-Notifly/main/others/bot.png" width="200" alt="Logo">
 
 ## Table of Contents
 * [About the package](#about-the-package)
@@ -71,19 +71,13 @@ To see how the tool works, create a [telegram bot][2].
 1. ***Creating the [telegram bot][0]***
    1. Open Telegram messenger, sign in to your account or create a new one.
    1. Enter _@Botfather_ in the search tab and choose this bot.<br>*Note, official Telegram bots have a blue checkmark beside their name*.<br>
-   ![image1][img1]
    1. Click _Start_ to activate BotFather bot.<br>
-   ![image2][img2]
    1. Choose or type _/newbot_ and send it.<br>
-   ![image3][img3]
    1. Choose a name for the bot, the bot can be found by its username in searches. The username must be unique and end with the word _bot_.<br>
 1. ***Getting the bot API token***
    * **Newly created bot**<br>
-   ![image4][img4]
+
    * **Already existing bot**<br>
-   ![image5][img5]
-   ![image6][img6]
-   ![image7][img7]
 1. ***Run sample code***
 ```python
 from telegram import notifly
@@ -97,8 +91,6 @@ if(opt_image=='y' or opt_image=='Y'):
     img_path = input("Enter full image path : ")
     bot.send_image(img_path)
 ```
-![image8][img8]
-![image9][img9]
 ## Contributing
 1. Fork the Project
 1. Create your Feature Branch 
@@ -132,12 +124,3 @@ git push origin feature/mybranch
 [1]:https://www.python.org/
 [2]:https://telegram.org/blog/bot-revolution
 [4]:https://www.python.org/downloads/
-[img1]:others/1.png
-[img2]:others/2.png
-[img3]:others/3.png
-[img4]:others/4.png
-[img5]:others/5.png
-[img6]:others/6.png
-[img7]:others/7.png
-[img8]:others/8.png
-[img9]:others/9.png
