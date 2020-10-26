@@ -131,7 +131,7 @@ class BotHandler:
                     for message in messages
                 )
 
-                if message_exist is False:
+                if not message_exist:
                     messages.append(update)
 
             json.dump(
@@ -147,14 +147,13 @@ class BotHandler:
             fetch_updates = self.get_updates()
 
             messages = []
-            
+
             if os.path.exists(message_path):
-                read_file = open(message_path, 'r')
-                messages = json.load(read_file)
-                
-                self.__append_messages(messages, fetch_updates, message_path)
-                
-                read_file.close()
+                with open(message_path, 'r') as read_file:
+                    messages = json.load(read_file)
+
+                    self.__append_messages(messages, fetch_updates, message_path)
+
             else:
                 self.__append_messages(messages, fetch_updates, message_path)
 
