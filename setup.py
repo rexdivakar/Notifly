@@ -16,8 +16,8 @@ with open("README.md", encoding="utf-8") as f:
  
 setup(
   name='notifly',
-  version='1.1.4',
-  description='Telegram Bot Notifier',
+  version='1.1.5',
+  description='Simple Bot Notifier',
   long_description=read_file,
   long_description_content_type='text/markdown',
   url='https://github.com/rexdivakar/Telegram-Notifly',  
@@ -25,7 +25,7 @@ setup(
   author_email='rexdivakar@hotmail.com',
   license='MIT', 
   classifiers=classifiers,
-  keywords='Telegram', 
+  keywords='Bot Notification', 
   packages=['telegram'],
   install_requires=['requests'] 
 )
