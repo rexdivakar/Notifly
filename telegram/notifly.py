@@ -25,14 +25,12 @@ class BotHandler:
 
         if data_type == 'img':
             progress_bar = tqdm(total=total, unit=' bits', desc='Uploading img')
-            for data in response.iter_content(512):
-                progress_bar.update(len(data))
-            progress_bar.close()
         else:
             progress_bar = tqdm(total=total, unit=' bits', desc='Uploading Doc')
-            for data in response.iter_content(512):
-                progress_bar.update(len(data))
-            progress_bar.close()
+
+        for data in response.iter_content(512):
+            progress_bar.update(len(data))
+        progress_bar.close()
 
     def get_updates(self, offset=0, timeout=30):
         method = 'getUpdates'
