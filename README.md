@@ -19,7 +19,7 @@
 * [Contributing](#contributing)
 
 ## About the package
-Telegram Bot to push notifications during an event trigger.
+A Simple Bot to push notifications during an event trigger.
 
 ## Built With
 * [Python][1]
@@ -79,7 +79,7 @@ To see how the tool works, create a [telegram bot][2].
    * **Already existing bot**<br>
 1. ***Run sample code***
 ```python
-from telegram import notifly
+from notifly import telegram
 
 token = input("Enter bot token : ")
 bot=notifly.BotHandler(token)

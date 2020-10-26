@@ -26,6 +26,6 @@ setup(
   license='MIT', 
   classifiers=classifiers,
   keywords='Bot Notification', 
-  packages=['telegram'],
+  packages=['notifly'],
   install_requires=['requests'] 
 )
