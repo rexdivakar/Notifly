@@ -1,14 +1,14 @@
-# Notify
+# Notifly
 ![PyPI](https://img.shields.io/pypi/v/notifly?logo=github&style=for-the-badge)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/notifly?color=green&style=for-the-badge&logo=github)
 ![Discord](https://img.shields.io/discord/760088481224851476?label=DISCORD&logo=discord&logoColor=green&style=for-the-badge)
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rexdivakar/telegram-notifly/Python%20application?&style=flat-square)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rexdivakar/telegram-notifly/Upload%20Python%20Package?label=Upload%20Python%20Package&style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rexdivakar/Notifly/Python%20application?&style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/rexdivakar/Notifly/Upload%20Python%20Package?label=Upload%20Python%20Package&style=flat-square)
 
 
 <p align="center">	<p align="center">
-<img src="https://raw.githubusercontent.com/rexdivakar/Telegram-Notifly/main/others/bot.png" width="200" alt="Logo">
+<img src="https://raw.githubusercontent.com/rexdivakar/Notifly/main/others/bot.png" width="200" alt="Logo">
 
 ## Table of Contents
 * [About the package](#about-the-package)
@@ -19,7 +19,7 @@
 * [Contributing](#contributing)
 
 ## About the package
-Telegram Bot to push notifications during an event trigger.
+A Simple Bot to push notifications during an event trigger.
 
 ## Built With
 * [Python][1]
@@ -79,7 +79,7 @@ To see how the tool works, create a [telegram bot][2].
    * **Already existing bot**<br>
 1. ***Run sample code***
 ```python
-from telegram import notifly
+from notifly import telegram
 
 token = input("Enter bot token : ")
 bot=notifly.BotHandler(token)

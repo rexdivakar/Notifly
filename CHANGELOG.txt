@@ -9,3 +9,4 @@ Change Log
 1.1.5 (26/10/2020)
 ------------------
 - Basic Fix and Major changes for Telegram module
+- Added Discord Bot feature
