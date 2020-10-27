@@ -1,11 +1,7 @@
 # -*- coding: UTF8 -*-
 import json
 import os
-from tqdm import tqdm
-
 import requests
-
-token = ''  # Token of your bot
 
 
 class BotHandler:
@@ -16,23 +12,6 @@ class BotHandler:
         self.dirDownloads = dirdownloads
 
     # url = "https://api.telegram.org/bot<token>/"
-
-    # Progress bar method to call,
-    # response is the http post sent
-    # data_type is the type of data being send
-    def create_progress_bar(self, response, data_type):
-        total = int(response.headers.get('content-length'))
-
-        if data_type == 'img':
-            progress_bar = tqdm(total=total, unit=' bits', desc='Uploading img')
-            for data in response.iter_content(512):
-                progress_bar.update(len(data))
-            progress_bar.close()
-        else:
-            progress_bar = tqdm(total=total, unit=' bits', desc='Uploading Doc')
-            for data in response.iter_content(512):
-                progress_bar.update(len(data))
-            progress_bar.close()
 
     def get_updates(self, offset=0, timeout=30):
         method = 'getUpdates'
@@ -48,7 +27,8 @@ class BotHandler:
         chat_id = fetch_updates[0]['message']['chat']['id']
         # update_id = fetch_updates[0]['update_id']
 
-        params = {'chat_id': chat_id, 'text': msg, 'parse_mode': 'HTML', 'disable_notification': notification}
+        params = {'chat_id': chat_id, 'text': msg,
+                  'parse_mode': 'HTML', 'disable_notification': notification}
         method = 'sendMessage'
         return requests.post(self.api_url + method, params)
 
@@ -58,11 +38,7 @@ class BotHandler:
         method = 'sendPhoto?' + 'chat_id=' + str(chat_id)
 
         files = {'photo': open(img_path, 'rb')}
-
-        resp = requests.post(self.api_url + method, files=files,stream=True)
-        self.create_progress_bar(resp, 'img')
-        print("Complete.")
-        # return requests.post(self.api_url + method, files=files)
+        return requests.post(self.api_url + method, files=files)
 
     def send_document(self, file_path):
         fetch_updates = self.get_updates()
@@ -70,71 +46,63 @@ class BotHandler:
         method = 'sendDocument?' + 'chat_id=' + str(chat_id)
 
         files = {'document': open(file_path, 'rb')}
-
-        resp = requests.post(self.api_url + method, files=files,stream=True)
-        self.create_progress_bar(resp, 'doc')
-        print("Complete.")
-        # return requests.post(self.api_url + method, files=files)
+        return requests.post(self.api_url + method, files=files)
 
     def download_files(self):
         fetch_updates = self.get_updates()
         for update in fetch_updates:
-            fileName = ''
+            file_name = ''
             media = ['document', 'photo', 'video', 'voice']
             # Check if update message contains any of the media keys from above
             intersection = list(set(update['message'].keys()) & set(media))
             if intersection:
-                mediaKey = intersection[0]
+                media_key = intersection[0]
 
-                # Determine fileId. For photos multiple versions exist. Use the last one.
-                if mediaKey == 'photo':
-                    fileId = update['message'][mediaKey][-1]['file_id']
+                # Determine file_id. For photos multiple versions exist. Use the last one.
+                if media_key == 'photo':
+                    file_id = update['message'][media_key][-1]['file_id']
                 else:
-                    fileId = update['message'][mediaKey]['file_id']
+                    file_id = update['message'][media_key]['file_id']
 
-                if mediaKey == 'document':
+                if media_key == 'document':
                     # In a document, it's possible to use the original name.
-                    fileName = update['message'][mediaKey]['file_name']
-                self.get_file(fileId, fileName)
+                    file_name = update['message'][media_key]['file_name']
+                self.get_file(file_id, file_name)
 
     def get_file(self, file_id, filename=''):
         """"Follow the getFile endpoint and download the file by file_id.
         A fileName can be given, else a file_unique_id gibberish name will be used.
-
         See also: https://core.telegram.org/bots/api#getfile
         """
         method = 'getFile?' + 'file_id=' + str(file_id)
         res = requests.post(self.api_url + method, file_id)
         try:
-            filePath = res.json()['result']['file_path']
-            # Determine the fileName. Use modified filePath if none given.
+            file_path = res.json()['result']['file_path']
+            # Determine the fileName. Use modified file_path if none given.
             if not filename:
-                filename = filePath[filePath.rfind('/') + 1:]
+                filename = file_path[file_path.rfind('/') + 1:]
         except (KeyError, ValueError):
             return "500 - Failed parsing the file link from API response."
 
         if not os.path.exists(self.dirDownloads):
             os.mkdir(self.dirDownloads)
 
-        localPath = os.path.join(self.dirDownloads, filename)
+        local_path = os.path.join(self.dirDownloads, filename)
 
         # Download file as stream.
-        res = requests.get(self.file_url + filePath, stream=True)
+        res = requests.get(self.file_url + file_path, stream=True)
         if res.status_code == 200:
             try:
-                with open(localPath, 'wb') as f:
+                with open(local_path, 'wb') as f:
                     for chunk in res:
                         f.write(chunk)
             except IOError:
                 pass
-            return '200 - {} written.'.format(localPath)
+            return '200 - {} written.'.format(local_path)
         else:
-            return '404 - Error accessing {}'.format(filePath)
+            return '404 - Error accessing {}'.format(file_path)
 
     def session_dump(self):
-        '''
-        Session Download manager
-        '''
         resp = self.get_updates()
         try:
             if not os.path.exists(self.dirDownloads):
