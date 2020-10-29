@@ -46,19 +46,14 @@ class BotHandler:
         # progress bar for sending document
         if data_type == 'doc':
             progress_bar = tqdm(self, total=total, unit=' bits', desc='Uploading doc')
+
             with open(file, 'rb') as doc:
                 for data in doc:
                     Compdata += data
                     progress_bar.update(len(data))
             progress_bar.close()
 
-            tempfile = open(os.path.join(f'{path}\\temp\\',filename), 'wb')
-            tempfile.write(Compdata)
-            tempfile.close()
-
-            tempfile = open(os.path.join(f'{path}\\temp\\',filename), 'rb')
-
-            doctosend = {'document': tempfile}
+            doctosend = {'document': open(file, 'rb')}
             return doctosend
 
 
@@ -94,7 +89,6 @@ class BotHandler:
         chat_id = fetch_updates[0]['message']['chat']['id']
         method = 'sendDocument?' + 'chat_id=' + str(chat_id)
 
-        # files = {'document': open(file_path, 'rb')}
         files = self.create_progress_bar(file_path, 'doc')
         return requests.post(self.api_url + method, files=files)
 
