@@ -15,13 +15,22 @@ class BotHandler:
     # url = "https://api.telegram.org/bot<token>/"
 
     # Progress bar method to call,
-    # file is the file to be sent
+    # file is the file(and it's path) to be sent
     # data_type is the type of data being send
     def create_progress_bar(self, file, data_type):
         total = os.path.getsize(file)
         print(f'total is {total}')
 
+        file_path = file.split('\\')
+        filename = file_path[-1]
+
+        print(f'file name is {filename}')
+        os.chdir('..')
+        path = os.getcwd()
+        print(f'current dir is {os.getcwd()}')
+
         Compdata = b''
+
         # progress bar for sending image
         if data_type == 'img':
             progress_bar = tqdm(self, total=total, unit=' bits', desc='Uploading img')
@@ -43,20 +52,14 @@ class BotHandler:
                     progress_bar.update(len(data))
             progress_bar.close()
 
-            doctosend = {'document': Compdata}
+            tempfile = open(os.path.join(f'{path}\\temp\\',filename), 'wb')
+            tempfile.write(Compdata)
+            tempfile.close()
+
+            tempfile = open(os.path.join(f'{path}\\temp\\',filename), 'rb')
+
+            doctosend = {'document': tempfile}
             return doctosend
-        '''
-        if data_type == 'img':
-            progress_bar = tqdm(total=total, unit=' bits', desc='Uploading img')
-            for data in response.iter_content(512):
-                progress_bar.update(len(data))
-            progress_bar.close()
-        else:
-            progress_bar = tqdm(total=total, unit=' bits', desc='Uploading Doc')
-            for data in response.iter_content(512):
-                progress_bar.update(len(data))
-            progress_bar.close()
-        '''
 
 
     def get_updates(self, offset=0, timeout=30):
