@@ -16,30 +16,27 @@ class BotHandler:
 
     # Progress bar method to call,
     # file is the file(and it's path) to be sent
-    # data_type is the type of data being send
+    # data_type is the type of data being sent
     def create_progress_bar(self, file, data_type):
+
+        # reads the total size of data to read & send
         total = os.path.getsize(file)
-        print(f'total is {total}')
 
-        file_path = file.split('\\')
-        filename = file_path[-1]
-
-        print(f'file name is {filename}')
-        os.chdir('..')
-        path = os.getcwd()
-        print(f'current dir is {os.getcwd()}')
-
+        # blank variable to hold the bytes of data to read & send
         Compdata = b''
 
         # progress bar for sending image
         if data_type == 'img':
             progress_bar = tqdm(self, total=total, unit=' bits', ncols=100, desc='Uploading img')
+
+            # Reads the data in the file
             with open(file,'rb') as img:
                 for data in img:
                     Compdata += data
                     progress_bar.update(len(data))
             progress_bar.close()
 
+            # Sends the data
             imgtosend = {'photo': Compdata}
             return imgtosend
 
@@ -47,12 +44,14 @@ class BotHandler:
         if data_type == 'doc':
             progress_bar = tqdm(self, total=total, unit=' bits', ncols=100, desc='Uploading doc')
 
+            # Reads the data in the file
             with open(file, 'rb') as doc:
                 for data in doc:
                     Compdata += data
                     progress_bar.update(len(data))
             progress_bar.close()
 
+            # Sends the data/file
             doctosend = {'document': open(file, 'rb')}
             return doctosend
 
