@@ -37,7 +37,7 @@ jobs:
         webhook: ${{ secrets.DISCORD_WEBHOOK }}
         status: ${{ job.status }}
         title: "deploy"
-        description: "Build and deploy to GitHub Pages"
+        description: "Lint with flake8"
         nofail: false
         nocontext: false
         noprefix: false
