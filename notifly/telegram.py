@@ -33,7 +33,7 @@ class BotHandler:
 
         # progress bar for sending image
         if data_type == 'img':
-            progress_bar = tqdm(self, total=total, unit=' bits', desc='Uploading img')
+            progress_bar = tqdm(self, total=total, unit=' bits', ncols=100, desc='Uploading img')
             with open(file,'rb') as img:
                 for data in img:
                     Compdata += data
@@ -45,7 +45,7 @@ class BotHandler:
 
         # progress bar for sending document
         if data_type == 'doc':
-            progress_bar = tqdm(self, total=total, unit=' bits', desc='Uploading doc')
+            progress_bar = tqdm(self, total=total, unit=' bits', ncols=100, desc='Uploading doc')
 
             with open(file, 'rb') as doc:
                 for data in doc:
