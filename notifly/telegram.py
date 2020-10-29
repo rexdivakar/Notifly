@@ -2,6 +2,7 @@
 import json
 import os
 import requests
+from tqdm import tqdm
 
 
 class BotHandler:
@@ -12,6 +13,51 @@ class BotHandler:
         self.dirDownloads = dirdownloads
 
     # url = "https://api.telegram.org/bot<token>/"
+
+    # Progress bar method to call,
+    # file is the file to be sent
+    # data_type is the type of data being send
+    def create_progress_bar(self, file, data_type):
+        total = os.path.getsize(file)
+        print(f'total is {total}')
+
+        Compdata = b''
+        # progress bar for sending image
+        if data_type == 'img':
+            progress_bar = tqdm(self, total=total, unit=' bits', desc='Uploading img')
+            with open(file,'rb') as img:
+                for data in img:
+                    Compdata += data
+                    progress_bar.update(len(data))
+            progress_bar.close()
+
+            imgtosend = {'photo': Compdata}
+            return imgtosend
+
+        # progress bar for sending document
+        if data_type == 'doc':
+            progress_bar = tqdm(self, total=total, unit=' bits', desc='Uploading doc')
+            with open(file, 'rb') as doc:
+                for data in doc:
+                    Compdata += data
+                    progress_bar.update(len(data))
+            progress_bar.close()
+
+            doctosend = {'document': Compdata}
+            return doctosend
+        '''
+        if data_type == 'img':
+            progress_bar = tqdm(total=total, unit=' bits', desc='Uploading img')
+            for data in response.iter_content(512):
+                progress_bar.update(len(data))
+            progress_bar.close()
+        else:
+            progress_bar = tqdm(total=total, unit=' bits', desc='Uploading Doc')
+            for data in response.iter_content(512):
+                progress_bar.update(len(data))
+            progress_bar.close()
+        '''
+
 
     def get_updates(self, offset=0, timeout=30):
         method = 'getUpdates'
@@ -37,7 +83,7 @@ class BotHandler:
         chat_id = fetch_updates[0]['message']['chat']['id']
         method = 'sendPhoto?' + 'chat_id=' + str(chat_id)
 
-        files = {'photo': open(img_path, 'rb')}
+        files = self.create_progress_bar(img_path, 'img')
         return requests.post(self.api_url + method, files=files)
 
     def send_document(self, file_path):
@@ -45,7 +91,8 @@ class BotHandler:
         chat_id = fetch_updates[0]['message']['chat']['id']
         method = 'sendDocument?' + 'chat_id=' + str(chat_id)
 
-        files = {'document': open(file_path, 'rb')}
+        # files = {'document': open(file_path, 'rb')}
+        files = self.create_progress_bar(file_path, 'doc')
         return requests.post(self.api_url + method, files=files)
 
     def download_files(self):
