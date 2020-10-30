@@ -31,9 +31,13 @@ class BotHandler:
 
             # Reads the data in the file
             with open(file,'rb') as img:
-                for data in img:
+                while True:
+                    data = img.read(512)
+                    if not data:
+                        break
                     Compdata += data
                     progress_bar.update(len(data))
+                    # yield data
             progress_bar.close()
 
             # Sends the data
@@ -46,9 +50,13 @@ class BotHandler:
 
             # Reads the data in the file
             with open(file, 'rb') as doc:
-                for data in doc:
+                while True:
+                    data = doc.read(1024)
+                    if not data:
+                        break
                     Compdata += data
                     progress_bar.update(len(data))
+                    # yield data
             progress_bar.close()
 
             # Sends the data/file
