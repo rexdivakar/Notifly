@@ -25,14 +25,16 @@ class BotHandler:
         # blank variable to hold the bytes of data to read & send
         Compdata = b''
 
+        progress_bar = tqdm(self, total=total, unit=' bits', ncols=100, desc=f'Uploading {data_type}]')
+
         # progress bar for sending image
         if data_type == 'img':
-            progress_bar = tqdm(self, total=total, unit=' bits', ncols=100, desc='Uploading img')
 
             # Reads the data in the file
             with open(file,'rb') as img:
                 while True:
-                    data = img.read(512)
+                    # set the speed the of the data being read
+                    data = img.read(1024)
                     if not data:
                         break
                     Compdata += data
@@ -46,12 +48,12 @@ class BotHandler:
 
         # progress bar for sending document
         if data_type == 'doc':
-            progress_bar = tqdm(self, total=total, unit=' bits', ncols=100, desc='Uploading doc')
 
             # Reads the data in the file
             with open(file, 'rb') as doc:
                 while True:
-                    data = doc.read(1024)
+                    # set the speed the of the data being read
+                    data = doc.read(8192)
                     if not data:
                         break
                     Compdata += data
