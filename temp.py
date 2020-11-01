@@ -1,40 +1,67 @@
 from notifly import discord
 import ssl
+
 ssl._create_default_https_context = ssl._create_unverified_context
-token='https://discord.com/api/webhooks/771253998313144321/5FNBsAi8-exyc-3rxLOYudQdQqMdpcaCOqCh6z1IX4ledG1oGyaONeIY1HDUns6qBZhW'
+token = 'https://discord.com/api/webhooks/771253998313144321/5FNBsAi8-exyc-3rxLOYudQdQqMdpcaCOqCh6z1IX4ledG1oGyaONeIY1HDUns6qBZhW'
 x = discord.Notifier(token)
 
 import inspect
 
-def test(f):
-    def inner(*args, **kwargs):
-        # combine parameters from the arguments into a single list
-        parameter_values = []
-        for i in args:
-            parameter_values.append(i)
 
-        for i in kwargs.values():
-            parameter_values.append(i)
-        print(parameter_values)
-        print(parameter_values)
-        sig = inspect.signature(f)
-        parameters = sig.parameters.keys()
-        print(parameters)
-        d = dict(zip(parameters, parameter_values))
-        print(d)
-        # TODO: in default parameters we wont get the default value if the value is not passed during the function call
+class NotifierCallback:
 
-        model_instance = d.get('self').model
-        print('\n')
-        hist = model_instance.history.history
-        print('\n')
-        epoch = d.get('epoch')
-        logs = d.get('logs')
+    @staticmethod
+    def notify_on_epoch_end(platform, epoch_interval, graph_interval, training_end_message, monitor='all'):
 
-        x.send(f"{epoch}. {hist}", print_message=False)
-        r = f(*args, **kwargs)
-        return r
-    return inner
+        def inner(func_to_call):
+            def wrapper(*args, **kwargs):
+
+                # get parameter values
+                parameter_values = []
+                for i in args:
+                    parameter_values.append(i)
+                for i in kwargs.values():
+                    parameter_values.append(i)
+
+                # get arguments names from the function signature
+                sig = inspect.signature(func_to_call)
+                parameter_names = sig.parameters.keys()
+
+                # parameter mapping with names to values
+                parameter_mapping = dict(zip(parameter_names, parameter_values))
+                print(parameter_mapping)
+
+                # get model instance
+                model_instance = parameter_mapping.get('self').model
+
+                # get current epoch because epoch starts from 0
+                current_epoch = parameter_mapping.get('epoch') + 1
+
+                # get current epoch logs
+                current_epoch_logs = parameter_mapping.get('logs')
+
+                # notify if current_epoch is divisible by epoch_interval
+                if current_epoch % epoch_interval == 0:
+                    message = f"epoch: {current_epoch},"
+                    for k, v in current_epoch_logs.items():
+                        message += " {}: {:.4f},".format(k, v)
+                    x.send(message, print_message=False)
+
+                # notify graph if current_epoch is divisible by graph_interval
+                if current_epoch % graph_interval == 0:
+                    x.send(f"{current_epoch}. {model_instance.history.history}", print_message=False)
+
+                # if training is ended in between by some callback
+                if model_instance.stop_training:
+                    x.send(f"Hooray! Training has ended by callback", print_message=False)
+
+                return_value = func_to_call(*args, **kwargs)
+
+                return return_value
+
+            return wrapper
+
+        return inner
 
 
 import tensorflow as tf
@@ -58,12 +85,14 @@ model.compile(optimizer='adam',
 
 
 class testCallback(tf.keras.callbacks.Callback):
-    @test
+    @NotifierCallback.notify_on_epoch_end(
+        platform='discord', epoch_interval=1, graph_interval=10, training_end_message=True, monitor='all')
     def on_epoch_end(self, epoch, logs=None):
-        print(tf.keras.optimizers)
+        pass
 
-model.fit(train_images, train_labels, epochs=5,callbacks=[testCallback()])
 
-test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
+model.fit(train_images, train_labels, epochs=5, callbacks=[testCallback()])
+
+test_loss, test_acc = model.evaluate(test_images, test_labels, verbose=2)
 
 print('\nTest accuracy:', test_acc)
