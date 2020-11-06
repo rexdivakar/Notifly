@@ -2,6 +2,13 @@
 
 When contributing to this repository, please first discuss the change you wish to make via issue with the owners of this repository before making a change. 
 
+## Maintainers 
+
+#### Divakar -- Discord id (root#5998)
+#### Sanchit -- Discord id (sanchit#5988)
+
+Discord server  - https://discord.gg/e47wmTW
+
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
 ## Issues
