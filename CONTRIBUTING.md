@@ -105,4 +105,4 @@ available at [http://contributor-covenant.org/version/1/4][version]
 [homepage]: http://contributor-covenant.org
 [version]: http://contributor-covenant.org/version/1/4/
 
-[1]:https://github.com/Tawishi/Notifly/blob/main/CODE_OF_CONDUCT.md
+[1]:https://github.com/rexdivakar/Notifly/blob/main/CODE_OF_CONDUCT.md
