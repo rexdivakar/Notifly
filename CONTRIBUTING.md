@@ -36,8 +36,9 @@ Tells me the problem that you have found, and the pull request shows me the acti
 * It reads well
 * For english language contributions: Has a good score on Grammarly or Hemingway App
 #### Does it move this repository closer to my vision for the repository
+Objecive for our repository is to build a package that acts as a notification medium which sends us about the model training parameters over telegram/discord/slack.We can also use this package as a notification medium for sending texts, picture and more. 
 #### Does it follow the contributor covenant
-This repository has a ![code of conduct][1], remove things that do not respect it.
+This repository has a [code of conduct][1], remove things that do not respect it.
 
 ## Our Pledge
 
@@ -111,5 +112,4 @@ available at [http://contributor-covenant.org/version/1/4][version]
 
 [homepage]: http://contributor-covenant.org
 [version]: http://contributor-covenant.org/version/1/4/
-
 [1]:https://github.com/rexdivakar/Notifly/blob/main/CODE_OF_CONDUCT.md
