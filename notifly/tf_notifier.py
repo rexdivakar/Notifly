@@ -1,5 +1,7 @@
 from notifly import discord
 import inspect
+import matplotlib.pyplot as plt
+import copy
 
 
 class TfNotifier:
@@ -7,6 +9,32 @@ class TfNotifier:
     def __init__(self, token, platform):
         if platform == 'discord':
             self.notifier = discord.Notifier(token)
+
+    @staticmethod
+    def plot_graph(history, current_epoch_logs):
+
+        # merge history with current epoch logs
+        for key, value in current_epoch_logs.items():
+            if key not in history:
+                history[key] = [value]
+            else:
+                history[key].append(value)
+
+        plt.figure()
+        for key, value in history.items():
+            if len(value) != 1:
+                plt.plot(range(1, len(value)+1), value, label=str(key))
+            else:
+                plt.scatter(range(1, len(value)+1), value, label=str(key))
+            plt.title("Training History")
+
+        plt.xlabel('Epochs')
+        plt.legend()
+        plt.pause(1e-13)
+        file_path = 'fig.png'
+        plt.savefig(file_path, bbox_inches='tight')
+        plt.close()
+        return file_path
 
     def notify_on_train_begin(self):
 
@@ -111,7 +139,10 @@ class TfNotifier:
 
                 # notify graph if current_epoch is divisible by graph_interval
                 if current_epoch % graph_interval == 0:
-                    self.notifier.send(f"{current_epoch}. {model_instance.history.history}", print_message=False)
+                    history_copy = copy.deepcopy(model_instance.history.history)
+                    file_path = TfNotifier.plot_graph(history_copy, current_epoch_logs)
+                    # TODO: change this function call
+                    send_report(file_path)
 
                 return_value = func_to_call(*args, **kwargs)
 
@@ -159,8 +190,11 @@ class TfNotifier:
 
                 # notify graph if current_epoch is divisible by graph_interval
                 if current_epoch % graph_interval == 0:
-                    self.notifier.send(f"{current_epoch}. {model_instance.history.history}", print_message=False)
-
+                    history_copy = copy.deepcopy(model_instance.history.history)
+                    file_path = TfNotifier.plot_graph(history_copy, current_epoch_logs)
+                    # TODO: change this function call
+                    send_report(file_path)
+                    
                 return_value = func_to_call(*args, **kwargs)
 
                 return return_value
