@@ -1,21 +1,22 @@
-import requests
-import json
+import slack
+from slack.errors import SlackApiError
 
 
 class Notifier:
-    def __init__(self, webhooks):
-        self.__webhooks = webhooks
+    """Slack-API call wrapper"""
+    def __init__(self, token):
+        self.__client = slack.WebClient(token = token)
+        try:
+            self.__client.api_test()['ok']
+        except SlackApiError as api_err:
+            print(f"Got an error: {api_err.response['error']}")
+            exit(1)
 
-    def send_message (self, msg):
-        data = {'text': msg, 'response_type': 'in_channel'}
-        response = requests.post (self.__webhooks, data = json.dumps (data),
-                                  headers = {'Content-Type': 'application/json'})
+    def send_message(self, channel, msg):  #TODO  Add unicode error
+        return self.__client.chat_postMessage(channel = channel, text = msg)
 
-    # def send_file(self, payload):
-    #     payload_json = json.dumps(payload)
-    #     data = {"payload": payload_json , 'response_type': 'in_channel'}
-    #
-    #     response = requests.post(self.__webhooks, data = json.dumps (data),
-    #                               headers = {'Content-Type': 'application/json'})
-
-
+    def send_image(self, channel, file_path):
+        try:
+            return self.__client.files_upload(file = file_path,  channels = channel)
+        except FileNotFoundError as fl_err:
+            print(fl_err)
