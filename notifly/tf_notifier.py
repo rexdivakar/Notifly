@@ -58,7 +58,7 @@ class TfNotifier:
                 # get starting logs
                 starting_logs = parameter_mapping.get('logs')
 
-                self.notifier.send(f':muscle: training started, got log keys: {starting_logs}')
+                self.notifier.send_message(f':muscle: training started, got log keys: {starting_logs}')
 
                 return_value = func_to_call(*args, **kwargs)
 
@@ -90,7 +90,7 @@ class TfNotifier:
                 # get starting logs
                 ending_logs = parameter_mapping.get('logs')
 
-                self.notifier.send(f':tada: training ended, got log keys: {ending_logs}')
+                self.notifier.send_message(f':tada: training ended, got log keys: {ending_logs}')
 
                 return_value = func_to_call(*args, **kwargs)
 
@@ -135,14 +135,14 @@ class TfNotifier:
                     message = f"epoch: {current_epoch} started, got log keys:"
                     for k, v in current_epoch_logs.items():
                         message += " {}: {:.4f} ".format(k, v)
-                    self.notifier.send(message, print_message=False)
+                    self.notifier.send_message(message)
 
                 # notify graph if current_epoch is divisible by graph_interval
                 if current_epoch % graph_interval == 0:
                     history_copy = copy.deepcopy(model_instance.history.history)
                     file_path = TfNotifier.plot_graph(history_copy, current_epoch_logs)
                     # TODO: change this function call
-                    send_report(file_path)
+                    self.notifier.send_file(file_path)
 
                 return_value = func_to_call(*args, **kwargs)
 
@@ -186,15 +186,15 @@ class TfNotifier:
                     message = f"epoch: {current_epoch} ended, got log keys:"
                     for k, v in current_epoch_logs.items():
                         message += " {}: {:.4f} ".format(k, v)
-                    self.notifier.send(message, print_message=False)
+                    self.notifier.send_message(message)
 
                 # notify graph if current_epoch is divisible by graph_interval
                 if current_epoch % graph_interval == 0:
                     history_copy = copy.deepcopy(model_instance.history.history)
                     file_path = TfNotifier.plot_graph(history_copy, current_epoch_logs)
                     # TODO: change this function call
-                    send_report(file_path)
-                    
+                    self.notifier.send_file(file_path)
+
                 return_value = func_to_call(*args, **kwargs)
 
                 return return_value
