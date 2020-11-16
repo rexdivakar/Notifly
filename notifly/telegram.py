@@ -107,9 +107,9 @@ class BotHandler:
         try:
             if not os.path.exists(self.dirDownloads):
                 os.mkdir(self.dirDownloads)
-            localPath = os.path.join(self.dirDownloads, 'session_dump.json')
+            local_path = os.path.join(self.dirDownloads, 'session_dump.json')
 
-            with open(localPath, 'w+', encoding='utf-8') as outfile:
+            with open(local_path, 'w+', encoding='utf-8') as outfile:
                 json.dump(resp, outfile)
         except:
             return 'Dump Error'
