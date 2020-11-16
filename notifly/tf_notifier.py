@@ -1,4 +1,4 @@
-from notifly import discord
+from notifly import discord, telegram, slack
 import inspect
 import matplotlib.pyplot as plt
 import copy
@@ -7,8 +7,17 @@ import copy
 class TfNotifier:
 
     def __init__(self, token, platform):
+        platform = platform.lower()
         if platform == 'discord':
             self.notifier = discord.Notifier(token)
+        elif platform == 'telegram':
+            self.notifier = telegram.BotHandler(token)
+        elif platform == 'slack':   #TODO Handle slack channel config
+            self.notifier = slack.Notifier(token)
+        else:
+            print('Invalid Platform selection')
+            exit(1)
+
 
     @staticmethod
     def plot_graph(history, current_epoch_logs):

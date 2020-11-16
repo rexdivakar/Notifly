@@ -12,7 +12,7 @@ class Notifier:
             print(f"Got an error: {api_err.response['error']}")
             exit(1)
 
-    def send_message(self, channel, msg):  #TODO  Add unicode error
+    def send_message(self, channel, msg):  #TODO  Add unicode check
         return self.__client.chat_postMessage(channel = channel, text = msg)
 
     def send_image(self, channel, file_path):

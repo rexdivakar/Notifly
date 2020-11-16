@@ -22,7 +22,7 @@ class BotHandler:
         except:
             return '404 error'
 
-    def send_message(self, msg, notification):
+    def send_message(self, msg, notification=False):
         fetch_updates = self.get_updates()
         chat_id = fetch_updates[0]['message']['chat']['id']
         # update_id = fetch_updates[0]['update_id']
