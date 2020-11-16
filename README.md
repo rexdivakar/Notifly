@@ -22,7 +22,7 @@
 A Simple Bot to push notifications during an event trigger.
 
 ## Built With
-* [Python][1]
+* [Python 3][1]
 
 ## Install the package
 Run the following terminal commands to install the package on the given distros.
