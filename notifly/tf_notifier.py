@@ -6,16 +6,16 @@ import copy
 
 class TfNotifier:
 
-    def __init__(self, token, platform):
+    def __init__(self, token, platform, channel= 'general'):
         platform = platform.lower()
         if platform == 'discord':
             self.notifier = discord.Notifier(token)
         elif platform == 'telegram':
             self.notifier = telegram.BotHandler(token)
         elif platform == 'slack':   #TODO Handle slack channel config
-            self.notifier = slack.Notifier(token)
+            self.notifier = slack.Notifier(token, channel)
         else:
-            print('Invalid Platform selection')
+            print('Invalid Selection')
             exit(1)
 
 
