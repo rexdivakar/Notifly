@@ -18,7 +18,6 @@ class TfNotifier:
             print('Invalid Selection')
             exit(1)
 
-
     @staticmethod
     def plot_graph(history, current_epoch_logs):
 

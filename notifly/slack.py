@@ -8,12 +8,15 @@ from slack.errors import SlackApiError
 class Notifier:
     def __init__(self, token, channel):
         """
-        Initialize the slack webclient instance using API
+        Initialize the slack webclient instance using API.
 
-        :argument token: -> API token [Mandatory]
-        :argument channel: -> Post's the notification to the corresponding channel [default = #general]
-
-        :return: the output of slack API_test which verify the Authentication protocol
+        Args:
+            token (string): API token [Mandatory].
+            channel (string): Post's the notification to it's corresponding channel [default = #general].
+        Returns:
+            The output of slack API_test which verify the Authentication protocol.
+        Raises:
+            SlackApiError.
         """
         self.__client = slack.WebClient(token = token)
         self.__channel = channel
@@ -24,12 +27,16 @@ class Notifier:
             print(f"Got an error: {api_err.response['error']}")
             exit(1)
 
-    def send_message(self, msg):  #TODO  Add unicode check
+    def send_message(self, msg) -> object:  #TODO  Add unicode check
         """
-        send_message -> function to post message to the slack channel
+        Function to post message to the slack channel.
 
-        :argument msg: -> Enter your message to post
-        :return: response to the message post
+        Args:
+            msg (string): Enter your message to post.
+        Returns:
+            Outputs the response of message on post operation.
+        Raises:
+            SlackApiError
         """
         try:
             return self.__client.chat_postMessage(channel = self.__channel, text = msg)
@@ -37,12 +44,16 @@ class Notifier:
             print(f"Got an error: {api_err.response['error']}")
             exit(1)
 
-    def send_image(self, file_path):
+    def send_file(self, file_path) -> object:
         """
-        send_image -> function to post an image to the slack channel
+        Function to post an file to the slack channel.
 
-        :argument file_path: -> enter the path of the file to be sent
-        :return: response to the message post
+        Args:
+            file_path (string): Enter the path of the file to be sent.
+        Returns:
+            Outputs the response of message on post operation.
+        Raises:
+                FileNotFoundError
         """
         try:
             return self.__client.files_upload(file = file_path,  channels = self.__channel)

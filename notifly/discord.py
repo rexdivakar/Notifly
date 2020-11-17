@@ -8,10 +8,13 @@ class Notifier:
         """
         Initialize the Discord Webhook instance
 
-        :argument webhooks: -> Discord webhook token [Mandatory]
-        :return: the response of webhook status
+        Args:
+            webhooks (basestring): Discord webhook token [Mandatory]
+        Returns:
+            The response of webhook status
+        Raises:
+            ConnectionError, Exception
         """
-
         self.__webhooks = webhooks
         self.payload = None
         try:
@@ -22,12 +25,16 @@ class Notifier:
             exit(1)
         #TODO Handle Network Error
 
-    def send_message(self, msg):
+    def send_message(self, msg) -> object:
         """
-        send_message -> function to post message to the discord channel
+        Function to post message to the discord channel
 
-        :argument msg: -> Posts message to the discord channel [String] [UTF-8]
-        :return: response to the message post
+        Args:
+            msg (string): Posts message to the discord channel [String] [UTF-8]
+        Returns:
+            The response to the message on post operation.
+        Raises:
+            ConnectionError
         """
         payload = {'content': str(msg)}
         try:
@@ -35,12 +42,16 @@ class Notifier:
         except ConnectionError as cer:
             print(cer)
 
-    def send_file(self, file_path):
+    def send_file(self, file_path) -> object:
         """
-        send_image -> function to post an image to the discord channel
+        Function to post an image to the discord channel
 
-        :argument file_path: -> enter the path of the file to be sent
-        :return: response to the message post
+        Args:
+            file_path (string): Enter the path of the file to be sent
+        Returns:
+            The response to the message on post operation.
+        Raises:
+            FileNotFoundError, OverflowError
         """
         try:
             self.payload = {'file': open(file_path, 'rb')}

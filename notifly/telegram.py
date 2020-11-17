@@ -7,14 +7,31 @@ import requests
 
 class BotHandler:
     def __init__(self, token, dir_download= './downloads'):
+        """
+        Initialize the telegram client using tokens to access the HTTP API
+
+        Args:
+            token (string): API token [Mandatory].
+        Args:
+            dir_download (string): -> Storage location for dumping payload [default = "./downloads"]
+        """
         self.token = token
         self.api_url = "https://api.telegram.org/bot{}/".format(token)
         self.file_url = "https://api.telegram.org/file/bot{}/".format(token)
         self.dirDownloads = dir_download
 
-    # url = "https://api.telegram.org/bot<token>/"
-
     def get_updates(self, offset=0, timeout=10):
+        """
+        Get the latest updates as json file
+
+        Args:
+            offset (int): default value 0
+            timeout (int): Timeout for the request post (default value 10)
+        Returns:
+            The json results
+        Raises:
+            TimeoutError
+        """
         method = 'getUpdates'
         params = {'timeout': timeout, 'offset': offset}
         resp = requests.get(self.api_url + method, params)
@@ -24,7 +41,15 @@ class BotHandler:
             print(tm_err)
             exit(1)
 
-    def chat_id_response(self):
+    def chat_id_response(self) -> int:
+        """
+        Fetches the latest chat id from the client
+
+        Returns:
+            The latest chat-id of the client
+        Raises:
+            TimeoutError
+        """
         try:
             fetch_updates = self.get_updates()
             return fetch_updates[0]['message']['chat']['id']
@@ -32,19 +57,40 @@ class BotHandler:
             print(tm_err)
             exit(1)
 
-    def send_message(self, msg, notification=False):
+    def send_message(self, msg, notification=False) -> object:
+        """
+        Function to send message
+
+        Args:
+            msg (string): Enter the message to post
+            notification (bool): Disable_Notification (default=False)
+        Returns:
+            The status_code of the post operation (send_message)
+        Raises:
+            IndexError
+        """
         try:
             method = 'sendMessage'
             params = {'chat_id': self.chat_id_response(), 'text': msg,
                       'parse_mode': 'HTML', 'disable_notification': notification}
             return requests.post(self.api_url + method, params)
-        except IndexError as err:
+        except IndexError:
             print('Time out error')
             exit(1)
 
-    def send_image(self, img_path):
+    def send_image(self, img_path) -> object:
+        """
+        Function to send image via telegram
+
+        Args:
+            img_path (basestring): Enter the file_path to send the image file
+        Returns:
+            The status_code of the post operation (send_image)
+        Raises:
+            FileNotFoundError, InvalidFormatError
+        """
         method = 'sendPhoto?' + 'chat_id=' + str(self.chat_id_response())
-        if img_path[-4:] in ['.jpg','.png']:
+        if img_path[-4:] in ['.jpg', '.png']:
             pass
         else:
             print('Invalid File Format, please use .jpg or .png format')
@@ -56,7 +102,17 @@ class BotHandler:
             print(fl_err)
             exit(1)
 
-    def send_document(self, file_path):
+    def send_document(self, file_path) -> object:
+        """
+        Function to send documents via telegram
+
+        Args:
+            file_path (basestring): Enter the file_path to send the image file
+        Returns:
+            The status_code of the post operation (send_document)
+        Raises:
+            FileNotFoundError, TimeoutError
+        """
         method = 'sendDocument?' + 'chat_id=' + str(self.chat_id_response())
         try:
             files = {'document': open(file_path, 'rb')}
@@ -68,61 +124,15 @@ class BotHandler:
             print(tm_err)
             exit(1)
 
-    def download_files(self):
-        fetch_updates = self.get_updates()
-        for update in fetch_updates:
-            file_name = ''
-            media = ['document', 'photo', 'video', 'voice']
-            # Check if update message contains any of the media keys from above
-            intersection = list(set(update['message'].keys()) & set(media))
-            if intersection:
-                media_key = intersection[0]
-
-                # Determine file_id. For photos multiple versions exist. Use the last one.
-                if media_key == 'photo':
-                    file_id = update['message'][media_key][-1]['file_id']
-                else:
-                    file_id = update['message'][media_key]['file_id']
-
-                if media_key == 'document':
-                    # In a document, it's possible to use the original name.
-                    file_name = update['message'][media_key]['file_name']
-                self.get_file(file_id, file_name)
-
-    def get_file(self, file_id, filename=''):
-        """"Follow the getFile endpoint and download the file by file_id.
-        A fileName can be given, else a file_unique_id gibberish name will be used.
-        See also: https://core.telegram.org/bots/api#getfile
+    def session_dump(self) -> json:
         """
-        method = 'getFile?' + 'file_id=' + str(file_id)
-        res = requests.post(self.api_url + method, file_id)
-        try:
-            file_path = res.json()['result']['file_path']
-            # Determine the fileName. Use modified file_path if none given.
-            if not filename:
-                filename = file_path[file_path.rfind('/') + 1:]
-        except (KeyError, ValueError):
-            return "500 - Failed parsing the file link from API response."
+        Function to Dump all the data from the telegram client during the current session
 
-        if not os.path.exists(self.dirDownloads):
-            os.mkdir(self.dirDownloads)
-
-        local_path = os.path.join(self.dirDownloads, filename)
-
-        # Download file as stream.
-        res = requests.get(self.file_url + file_path, stream=True)
-        if res.status_code == 200:
-            try:
-                with open(local_path, 'wb') as f:
-                    for chunk in res:
-                        f.write(chunk)
-            except IOError:
-                pass
-            return '200 - {} written.'.format(local_path)
-        else:
-            return '404 - Error accessing {}'.format(file_path)
-
-    def session_dump(self):
+        Returns:
+            Dumps the session details in the form of json file.
+        Raises:
+            IOError
+        """
         resp = self.get_updates()
         try:
             if not os.path.exists(self.dirDownloads):

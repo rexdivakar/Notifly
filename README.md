@@ -8,7 +8,7 @@
 
 
 <p align="center">	<p align="center">
-<img src="https://raw.githubusercontent.com/rexdivakar/Notifly/main/others/bot.png" width="200" alt="Logo">
+<img src="https://raw.githubusercontent.com/rexdivakar/Notifly/main/.others/bot.png" width="200" alt="Logo">
 
 ## Table of Contents
 * [About the package](#about-the-package)
