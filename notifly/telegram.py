@@ -1,52 +1,72 @@
-# -*- coding: UTF8 -*-
+""" Telegram Wrapper"""""
+
 import json
 import os
 import requests
 
 
 class BotHandler:
-    def __init__(self, token, dirdownloads='./downloads'):
+    def __init__(self, token, dir_download= './downloads'):
         self.token = token
         self.api_url = "https://api.telegram.org/bot{}/".format(token)
         self.file_url = "https://api.telegram.org/file/bot{}/".format(token)
-        self.dirDownloads = dirdownloads
+        self.dirDownloads = dir_download
 
     # url = "https://api.telegram.org/bot<token>/"
 
-    def get_updates(self, offset=0, timeout=30):
+    def get_updates(self, offset=0, timeout=10):
         method = 'getUpdates'
         params = {'timeout': timeout, 'offset': offset}
         resp = requests.get(self.api_url + method, params)
         try:
             return resp.json()['result']
-        except:
-            return '404 error'
+        except TimeoutError as tm_err:
+            print(tm_err)
+            exit(1)
+
+    def chat_id_response(self):
+        try:
+            fetch_updates = self.get_updates()
+            return fetch_updates[0]['message']['chat']['id']
+        except TimeoutError as tm_err:
+            print(tm_err)
+            exit(1)
 
     def send_message(self, msg, notification=False):
-        fetch_updates = self.get_updates()
-        chat_id = fetch_updates[0]['message']['chat']['id']
-        # update_id = fetch_updates[0]['update_id']
-
-        params = {'chat_id': chat_id, 'text': msg,
-                  'parse_mode': 'HTML', 'disable_notification': notification}
-        method = 'sendMessage'
-        return requests.post(self.api_url + method, params)
+        try:
+            method = 'sendMessage'
+            params = {'chat_id': self.chat_id_response(), 'text': msg,
+                      'parse_mode': 'HTML', 'disable_notification': notification}
+            return requests.post(self.api_url + method, params)
+        except IndexError as err:
+            print('Time out error')
+            exit(1)
 
     def send_image(self, img_path):
-        fetch_updates = self.get_updates()
-        chat_id = fetch_updates[0]['message']['chat']['id']
-        method = 'sendPhoto?' + 'chat_id=' + str(chat_id)
-
-        files = {'photo': open(img_path, 'rb')}
-        return requests.post(self.api_url + method, files=files)
+        method = 'sendPhoto?' + 'chat_id=' + str(self.chat_id_response())
+        if img_path[-4:] in ['.jpg','.png']:
+            pass
+        else:
+            print('Invalid File Format, please use .jpg or .png format')
+            exit(1)
+        try:
+            files = {'photo': open(img_path, 'rb')}
+            return requests.post(self.api_url + method, files = files)
+        except FileNotFoundError as fl_err:
+            print(fl_err)
+            exit(1)
 
     def send_document(self, file_path):
-        fetch_updates = self.get_updates()
-        chat_id = fetch_updates[0]['message']['chat']['id']
-        method = 'sendDocument?' + 'chat_id=' + str(chat_id)
-
-        files = {'document': open(file_path, 'rb')}
-        return requests.post(self.api_url + method, files=files)
+        method = 'sendDocument?' + 'chat_id=' + str(self.chat_id_response())
+        try:
+            files = {'document': open(file_path, 'rb')}
+            return requests.post(self.api_url + method, files = files)
+        except FileNotFoundError as fn_err:
+            print(fn_err)
+            exit(1)
+        except TimeoutError as tm_err:
+            print(tm_err)
+            exit(1)
 
     def download_files(self):
         fetch_updates = self.get_updates()
@@ -111,5 +131,6 @@ class BotHandler:
 
             with open(local_path, 'w+', encoding='utf-8') as outfile:
                 json.dump(resp, outfile)
-        except:
-            return 'Dump Error'
+        except IOError as io_err:
+            print(io_err)
+            exit(1)
