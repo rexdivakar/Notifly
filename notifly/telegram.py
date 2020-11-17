@@ -1,4 +1,4 @@
-""" Telegram Wrapper"""""
+""" Telegram Wrapper"""
 
 import json
 import os

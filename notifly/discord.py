@@ -1,9 +1,17 @@
 """Discord API webhooks wrapper"""
 
 import requests
+from requests import exceptions
 
 
 class Notifier:
+
+    class AuthError(Exception):
+        """
+        Authentication Exception
+        """
+        pass
+
     def __init__(self, webhooks):
         """
         Initialize the Discord Webhook instance
@@ -13,16 +21,19 @@ class Notifier:
         Returns:
             The response of webhook status
         Raises:
-            ConnectionError, Exception
+            Exception, AuthError
         """
         self.__webhooks = webhooks
         self.payload = None
+
         try:
             if requests.get(self.__webhooks).status_code == 401:
-                raise ConnectionError('Invalid Webhook')
-        except Exception as err:
+                raise Notifier.AuthError('Invalid Webhook')
+        except exceptions.ConnectionError as err:
             print(err)
-            exit(1)
+        except Notifier.AuthError as ty_err:
+            print(ty_err)
+
         #TODO Handle Network Error
 
     def send_message(self, msg) -> object:
@@ -39,7 +50,7 @@ class Notifier:
         payload = {'content': str(msg)}
         try:
             return requests.post(url = self.__webhooks, data = payload)
-        except ConnectionError as cer:
+        except exceptions.ConnectionError as cer:
             print(cer)
 
     def send_file(self, file_path) -> object:
