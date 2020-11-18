@@ -6,7 +6,7 @@ from slack.errors import SlackApiError
 
 
 class Notifier:
-    def __init__(self, token, channel):
+    def __init__(self, token, channel = 'general'):
         """
         Initialize the slack webclient instance using API.
 
