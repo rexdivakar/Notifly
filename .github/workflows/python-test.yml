@@ -43,7 +43,7 @@ jobs:
         webhook: ${{ secrets.DISCORD_WEBHOOK }}
         status: ${{ job.status }}
         title: "deploy"
-        description: "Lint with flake8"
+        description: "Pytest"
         nofail: false
         nocontext: false
         noprefix: false
