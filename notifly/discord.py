@@ -21,7 +21,7 @@ class Notifier:
         Returns:
             The response of webhook status
         Raises:
-            Exception, AuthError
+            Exception, AuthError, MissingSchema
         """
         self.__webhooks = webhooks
         self.payload = None
@@ -33,8 +33,10 @@ class Notifier:
             print(err)
         except Notifier.AuthError as ty_err:
             print(ty_err)
-
-        #TODO Handle Network Error
+            exit(1)
+        except requests.models.MissingSchema as ms_err:
+            print(ms_err)
+            exit(1)
 
     def send_message(self, msg) -> object:
         """
@@ -52,6 +54,7 @@ class Notifier:
             return requests.post(url = self.__webhooks, data = payload)
         except exceptions.ConnectionError as cer:
             print(cer)
+            exit(1)
 
     def send_file(self, file_path) -> object:
         """
@@ -73,3 +76,4 @@ class Notifier:
             return requests.post(url = self.__webhooks, files = self.payload)
         except OverflowError as err:
             print('Size Overflow Error', err)
+            exit(1)

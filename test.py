@@ -1,7 +1,10 @@
 import ssl
 from notifly import tf_notifier
 import tensorflow as tf
+import os
 import pytest
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 
 def test():
@@ -43,3 +46,5 @@ def test():
 
     model.fit(train_images, train_labels, epochs=1, callbacks=[TestCallback()])
 
+
+test()

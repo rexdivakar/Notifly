@@ -15,7 +15,7 @@ class TfNotifier:
         elif platform == 'slack':   #TODO Handle slack channel config
             self.notifier = slack.Notifier(token, channel)
         else:
-            print('Invalid Selection')
+            print('Invalid Platform')
             exit(1)
 
     @staticmethod

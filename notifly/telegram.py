@@ -37,8 +37,8 @@ class BotHandler:
         resp = requests.get(self.api_url + method, params)
         try:
             return resp.json()['result']
-        except TimeoutError as tm_err:
-            print(tm_err)
+        except KeyError as tm_err:
+            print('TimeoutError')
             exit(1)
 
     def chat_id_response(self) -> int:
