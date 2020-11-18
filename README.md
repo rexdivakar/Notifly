@@ -92,19 +92,19 @@ if(opt_image=='y' or opt_image=='Y'):
 ```
 ## Contributing
 1. Fork the Project
-1. Create your Feature Branch 
+2. Create your Feature Branch 
 ```
 git checkout -b feature/mybranch
 ```
-1. Commit your Changes 
+3. Commit your Changes 
 ```
 git commit -m 'Add something'
 ```
-1. Push to the Branch 
+4. Push to the Branch 
 ```
 git push origin feature/mybranch
 ```
-1. Open a Pull Request
+5. Open a Pull Request
 
 *Follow the given commands or use the amazing GitHub GUI*
 <br>**Happy Contributing** :smiley:

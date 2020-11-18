@@ -42,4 +42,4 @@ jobs:
         color: 0x0000ff
         username: GitHub Actions
         avatar_url: ${{ secrets.AVATAR_URL }}
-  
+
