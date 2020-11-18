@@ -1,3 +1,4 @@
+!pip install tensorflow
 import ssl
 from notifly import tf_notifier
 import tensorflow as tf
