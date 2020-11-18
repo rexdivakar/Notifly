@@ -5,7 +5,3 @@ Discord: (object): Discord wrapper to send message, images to the channel using 
 Slack (object): Slack wrapper to send message, images to the channel using API
 Telegram (object): Telegram Web Client wrapper to send images, files over the bot using API
 """
-
-
-def discord():
-    return None

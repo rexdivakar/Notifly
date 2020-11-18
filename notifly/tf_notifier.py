@@ -1,4 +1,4 @@
-import notifly
+from notifly import discord, telegram, slack
 import inspect
 import matplotlib.pyplot as plt
 import copy
@@ -9,11 +9,11 @@ class TfNotifier:
     def __init__(self, token, platform, channel= 'general'):
         platform = platform.lower()
         if platform == 'discord':
-            self.notifier = notifly.discord.Notifier(token)
+            self.notifier = discord.Notifier(token)
         elif platform == 'telegram':
-            self.notifier = notifly.telegram.BotHandler(token)
+            self.notifier = telegram.BotHandler(token)
         elif platform == 'slack':   #TODO Handle slack channel config
-            self.notifier = notifly.slack.Notifier(token, channel)
+            self.notifier = slack.Notifier(token, channel)
         else:
             print('Invalid Platform')
             exit(1)
