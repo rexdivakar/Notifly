@@ -20,7 +20,7 @@ class BotHandler:
         self.file_url = "https://api.telegram.org/file/bot{}/".format(token)
         self.dirDownloads = dir_download
 
-    def get_updates(self, offset=0, timeout=10):
+    def __get_updates(self, offset=0, timeout=10):
         """
         Get the latest updates as json file
 
@@ -37,11 +37,11 @@ class BotHandler:
         resp = requests.get(self.api_url + method, params)
         try:
             return resp.json()['result']
-        except KeyError as tm_err:
+        except KeyError:
             print('TimeoutError')
             exit(1)
 
-    def chat_id_response(self) -> int:
+    def __chat_id_response(self) -> int:
         """
         Fetches the latest chat id from the client
 
@@ -51,7 +51,7 @@ class BotHandler:
             TimeoutError
         """
         try:
-            fetch_updates = self.get_updates()
+            fetch_updates = self.__get_updates()
             return fetch_updates[0]['message']['chat']['id']
         except TimeoutError as tm_err:
             print(tm_err)
@@ -71,7 +71,7 @@ class BotHandler:
         """
         try:
             method = 'sendMessage'
-            params = {'chat_id': self.chat_id_response(), 'text': msg,
+            params = {'chat_id': self.__chat_id_response(), 'text': msg,
                       'parse_mode': 'HTML', 'disable_notification': notification}
             return requests.post(self.api_url + method, params)
         except IndexError:
@@ -89,7 +89,7 @@ class BotHandler:
         Raises:
             FileNotFoundError, InvalidFormatError
         """
-        method = 'sendPhoto?' + 'chat_id=' + str(self.chat_id_response())
+        method = 'sendPhoto?' + 'chat_id=' + str(self.__chat_id_response())
         if img_path[-4:] in ['.jpg', '.png']:
             pass
         else:
@@ -113,7 +113,7 @@ class BotHandler:
         Raises:
             FileNotFoundError, TimeoutError
         """
-        method = 'sendDocument?' + 'chat_id=' + str(self.chat_id_response())
+        method = 'sendDocument?' + 'chat_id=' + str(self.__chat_id_response())
         try:
             files = {'document': open(file_path, 'rb')}
             return requests.post(self.api_url + method, files = files)
@@ -133,7 +133,7 @@ class BotHandler:
         Raises:
             IOError
         """
-        resp = self.get_updates()
+        resp = self.__get_updates()
         try:
             if not os.path.exists(self.dirDownloads):
                 os.mkdir(self.dirDownloads)
