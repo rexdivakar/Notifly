@@ -90,9 +90,7 @@ class BotHandler:
             FileNotFoundError, InvalidFormatError
         """
         method = 'sendPhoto?' + 'chat_id=' + str(self.chat_id_response())
-        if img_path[-4:] in ['.jpg', '.png']:
-            pass
-        else:
+        if img_path[-4:] not in ['.jpg', '.png']:
             print('Invalid File Format, please use .jpg or .png format')
             exit(1)
         try:
