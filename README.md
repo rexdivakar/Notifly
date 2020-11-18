@@ -8,7 +8,7 @@
 
 
 <p align="center">	<p align="center">
-<img src="https://raw.githubusercontent.com/rexdivakar/Notifly/main/others/bot.png" width="200" alt="Logo">
+<img src="https://raw.githubusercontent.com/rexdivakar/Notifly/main/.others/bot.png" width="200" alt="Logo">
 
 ## Table of Contents
 * [About the package](#about-the-package)
@@ -22,7 +22,7 @@
 A Simple Bot to push notifications during an event trigger.
 
 ## Built With
-* [Python][1]
+* [Python 3][1]
 
 ## Install the package
 Run the following terminal commands to install the package on the given distros.
@@ -49,7 +49,7 @@ pip3 install notifly
 ```
 ***This may take a while depending on the network speed.***
 ### Prerequisites
-* Python3<br>
+* Python<br>
 It is preinstalled in Ubuntu 20.04. To check the version use command :
 ```
 python3 --version
