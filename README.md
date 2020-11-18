@@ -49,7 +49,7 @@ pip3 install notifly
 ```
 ***This may take a while depending on the network speed.***
 ### Prerequisites
-* Python3<br>
+* Python<br>
 It is preinstalled in Ubuntu 20.04. To check the version use command :
 ```
 python3 --version
