@@ -36,3 +36,17 @@ jobs:
     - name: Test with pytest
       run: |
         pytest test.py -v --disable-warnings
+        
+    - uses: sarisia/actions-status-discord@v1
+      if: always()
+      with:
+        webhook: ${{ secrets.DISCORD_WEBHOOK }}
+        status: ${{ job.status }}
+        title: "deploy"
+        description: "Lint with flake8"
+        nofail: false
+        nocontext: false
+        noprefix: false
+        color: 0x0000ff
+        username: GitHub Actions
+        avatar_url: ${{ secrets.AVATAR_URL }}
