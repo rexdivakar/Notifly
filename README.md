@@ -13,16 +13,46 @@
 ## Table of Contents
 * [About the package](#about-the-package)
   * [Built With](#built-with)
+* [Prerequisites for install](#prerequisites)
 * [Install the package](#install-the-package)
-  * [Working of the tool](#working-of-the-tool)
-  * [Prerequisites](#prerequisites)
+* [Working of the tool](#working-of-the-tool)
+    * [Telegram](#telegram)
+    * [Discord](#discord)
+    * [Slack](#slack)
 * [Contributing](#contributing)
 
 ## About the package
-A Simple Bot to push notifications during an event trigger.
+Simple Bots to push notifications during an event trigger. <br>
 
-## Built With
+[!["Telegram"](https://img.shields.io/badge/%20Telegram-%20.svg?longCache=true&logo=telegram&colorB=blue)](https://telegram.org/) 
+wrapper to send messages, images, files over the bot using API. <br>
+[!["Discord"](https://img.shields.io/badge/%20Discord-%20.svg?longCache=true&logo=discord&colorB=lightblue)](https://discord.com/) 
+wrapper to send message, images, files to the channel using Webhooks. <br>
+[!["Slack"](https://img.shields.io/badge/%20slack-gray.svg?longCache=true&logo=slack&colorB=brightgreen)](https://slack.com) 
+wrapper to send message, images, files to the channel using API.
+
+### Built With
 * [Python 3][1]
+
+## Prerequisites
+* Python<br>
+It is preinstalled in Ubuntu 20.04. To check the version use command :
+```
+python3 --version
+```
+If it is not preinstalled for some reason, proceed [here][4] and download as per requirement.
+
+Run the following command in terminal to download the required packags for running the tool locally : 
+* Using requirements file :
+```
+pip3 install -r requirements.txt
+```
+* Directly download packages:
+```
+pip3 install requests==2.24.0
+pip3 install matplotlib==3.2.2
+pip3 install slackclient==2.9.3
+```
 
 ## Install the package
 Run the following terminal commands to install the package on the given distros.
@@ -48,66 +78,70 @@ sudo pacman -S python3-pip
 pip3 install notifly
 ```
 ***This may take a while depending on the network speed.***
-### Prerequisites
-* Python<br>
-It is preinstalled in Ubuntu 20.04. To check the version use command :
-```
-python3 --version
-```
-If it is not preinstalled for some reason, proceed [here][4] and download as per requirement.
 
-Run the following command in terminal to download the required packags for running the tool locally : 
-* Using requirements file :
-```
-pip3 install -r requirements.txt
-```
-* Directly download :
-```
-pip3 install requests==2.20.0
-```
-### Working of the tool
-To see how the tool works, create a [telegram bot][2].
-1. ***Creating the [telegram bot][0]***
-   1. Open Telegram messenger, sign in to your account or create a new one.
-   1. Enter _@Botfather_ in the search tab and choose this bot.<br>*Note, official Telegram bots have a blue checkmark beside their name*.<br>
-   1. Click _Start_ to activate BotFather bot.<br>
-   1. Choose or type _/newbot_ and send it.<br>
-   1. Choose a name for the bot, the bot can be found by its username in searches. The username must be unique and end with the word _bot_.<br>
-1. ***Getting the bot API token***
-   * **Newly created bot**<br>
-
-   * **Already existing bot**<br>
-1. ***Run sample code***
-```python
-from notifly import telegram
-
-token = input("Enter bot token : ")
-bot=notifly.BotHandler(token)
-text = input("Enter text message : ")
-print(bot.send_message(text))
-opt_image = input("Do you want to send image ?")
-if(opt_image=='y' or opt_image=='Y'):
-    img_path = input("Enter full image path : ")
-    bot.send_image(img_path)
-```
+## Working of the tool
+### Telegram
+To see how the tool works,
+1. Create the [telegram bot][2].
+2. Getting the bot API token
+   1. Search and go to ```_@Botfather_``` .
+   1. Message ```/mybots``` .
+   1. Select the bot.
+   1. Select the _API token_ displayed in message.
+   1. Copy and use in sample code.
+   ```python
+   from notifly import telegram        #import the package    
+   x = telegram.BotHandler('bot API token')        #create object of class BotHandler
+   x.send_message('message')       #send message
+   x.send_image("image address")        #send image(.jpg or .png format)
+   x.send_document("file address")     #send document
+   x.session_dump()        #creates folder named 'downloads' in local folder, downloads/saves message,chat details for current session in 'sessio_dump.json' file
+    ```
+3. Run sample code.
+### Discord
+To see how the tool works,
+1. Create server.
+2. Create and copy server [webhook][5] and use in sample code.
+   ```python
+   from notifly import discord
+   x = discord.Notifier(r'webhook')       #create object of class Notiflier
+   x.send_message('message')      #send message
+   x.send_file("file address")        #send file
+   x.send_file("image address")       #send image
+   ```
+3. Run sample code.
+### Slack
+To see how the tool works,
+1. Create app. Follow these steps,
+    1. Go [here][6].
+    2. Go to ```Create an App``` .
+    3. Enter _App Name_ and select workspace. Click ```Create App```.
+    4. Under **Add features and functionality** select ```Incoming Webhooks``` and **Activate Incoming Webhooks**.
+    5. Scroll down, select ```Add New Webhook to Workspace``` and select a channel from the drop down.This channel name is used as an argument in the sample code. Click ```Allow```.
+    6. Select **OAuth & Permissions** from left-sidebar.
+    7. Under **Scopes** > **Bot Token Scopes**  click ```Add an OAuth Scope``` and add the following scopes,
+       <br>```chat:write``` &nbsp; ```chat:write.public``` &nbsp; ```files:write``` &nbsp; ```users:write```
+    8. Scroll up, under **OAuth Tokens for Your Team** copy the *Bot User OAuth Access Token* to use in sample code.
+    9. Click ```Reinstall to Workspace```, select channel and click ```Allow```.
+2. Write sample code.
+   ```python
+   from notifly import slack
+   x= slack.Notifier('token', channel='channel-name')      #create object of class Notiflier
+   x.send_message('message')      #send message
+   x.send_file("image or file address")      #send image/file
+   ```
+3. Run sample code.
 ## Contributing
 1. Fork the Project
-2. Create your Feature Branch 
-```
-git checkout -b feature/mybranch
-```
-3. Commit your Changes 
-```
-git commit -m 'Add something'
-```
-4. Push to the Branch 
-```
-git push origin feature/mybranch
-```
-5. Open a Pull Request
-
-*Follow the given commands or use the amazing GitHub GUI*
-<br>**Happy Contributing** :smiley:
+1. Create your Feature Branch 
+   >git checkout -b feature/mybranch
+1. Commit your Changes 
+    >git commit -m 'Add something'
+1. Push to the Branch
+    >git push origin feature/mybranch
+1. Open a Pull Request<br><br>
+Follow the given commands or use the amazing ***GitHub GUI***<br>
+**Happy Contributing**
 
 [contributors-shield]: https://img.shields.io/github/contributors/rexdivakar/Telegram-Notifly.svg?style=flat-square
 [contributors-url]: https://github.com/rexdivakar/Telegram-Notifly/graphs/contributors
@@ -119,7 +153,8 @@ git push origin feature/mybranch
 [issues-url]: https://github.com/rexdivakar/Telegram-Notifly/issues
 [license-shield]: https://img.shields.io/github/license/rexdivakar/Telegram-Notifly.svg?style=flat-square
 [license-url]: https://github.com/rexdivakar/Telegram-Notifly/blob/master/LICENSE.txt
-[0]:https://core.telegram.org/bots
 [1]:https://www.python.org/
 [2]:https://telegram.org/blog/bot-revolution
 [4]:https://www.python.org/downloads/
+[5]:https://discordjs.guide/popular-topics/webhooks.html#fetching-all-webhooks-of-a-guild
+[6]:https://api.slack.com/
