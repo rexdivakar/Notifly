@@ -27,5 +27,5 @@ setup(
   classifiers=classifiers,
   keywords='Bot Notification', 
   packages=['notifly'],
-  install_requires=['requests'] 
+  install_requires=['requests', 'numpy==1.19.3', 'matplotlib', 'slackclient']
 )
