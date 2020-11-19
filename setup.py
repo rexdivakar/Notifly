@@ -22,7 +22,7 @@ setup(
   long_description_content_type='text/markdown',
   url='https://github.com/rexdivakar/Telegram-Notifly',  
   author='Divakar R', 'Sanchit Jain' ,
-  author_email='rexdivakar@hotmail.com', 'sanchitjain1996@gmail.com'
+  author_email='rexdivakar@hotmail.com', 'sanchitjain1996@gmail.com',
   license='MIT', 
   classifiers=classifiers,
   keywords='Bot Notification', 
