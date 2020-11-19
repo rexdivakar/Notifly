@@ -102,7 +102,7 @@ class BotHandler:
             print(fl_err)
             exit(1)
 
-    def send_document(self, file_path) -> object:
+    def send_file(self, file_path) -> object:
         """
         Function to send documents via telegram
 

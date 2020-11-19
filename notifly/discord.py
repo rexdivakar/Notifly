@@ -6,7 +6,7 @@ from requests import exceptions
 
 class Notifier:
 
-    class AuthError(Exception):
+    class __AuthError(Exception):
         """
         Authentication Exception
         """
@@ -28,10 +28,10 @@ class Notifier:
 
         try:
             if requests.get(self.__webhooks).status_code == 401:
-                raise Notifier.AuthError('Invalid Webhook')
+                raise Notifier.__AuthError('Invalid Webhook')
         except exceptions.ConnectionError as err:
             print(err)
-        except Notifier.AuthError as ty_err:
+        except Notifier.__AuthError as ty_err:
             print(ty_err)
             exit(1)
         except requests.models.MissingSchema as ms_err:
