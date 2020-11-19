@@ -24,7 +24,7 @@
 ## About the package
 Simple Bots to push notifications during an event trigger. <br>
 
-[!["Telegram"](https://img.shields.io/badge/%20Telegram-%20.svg?longCache=true&logo=telegram&colorB=blue)](https://telegram.com/) 
+[!["Telegram"](https://img.shields.io/badge/%20Telegram-%20.svg?longCache=true&logo=telegram&colorB=blue)](https://telegram.org/) 
 wrapper to send messages, images, files over the bot using API. <br>
 [!["Discord"](https://img.shields.io/badge/%20Discord-%20.svg?longCache=true&logo=discord&colorB=lightblue)](https://discord.com/) 
 wrapper to send message, images, files to the channel using Webhooks. <br>
