@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.1" />
+<title>notifly.telegram API documentation</title>
+<meta name="description" content="Telegram Wrapper" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>notifly.telegram</code></h1>
+</header>
+<section id="section-intro">
+<p>Telegram Wrapper</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34; Telegram Wrapper&#34;&#34;&#34;
+
+import json
+import os
+import requests
+
+
+class BotHandler:
+    def __init__(self, token, dir_download= &#39;./downloads&#39;):
+        &#34;&#34;&#34;
+        Initialize the telegram client using tokens to access the HTTP API
+
+        Args:
+            token (string): API token [Mandatory].
+        Args:
+            dir_download (string): -&gt; Storage location for dumping payload [default = &#34;./downloads&#34;]
+        &#34;&#34;&#34;
+        self.token = token
+        self.api_url = &#34;https://api.telegram.org/bot{}/&#34;.format(token)
+        self.file_url = &#34;https://api.telegram.org/file/bot{}/&#34;.format(token)
+        self.dirDownloads = dir_download
+
+    def __get_updates(self, offset=0, timeout=10):
+        &#34;&#34;&#34;
+        Get the latest updates as json file
+
+        Args:
+            offset (int): default value 0
+            timeout (int): Timeout for the request post (default value 10)
+        Returns:
+            The json results
+        Raises:
+            TimeoutError
+        &#34;&#34;&#34;
+        method = &#39;getUpdates&#39;
+        params = {&#39;timeout&#39;: timeout, &#39;offset&#39;: offset}
+        resp = requests.get(self.api_url + method, params)
+        try:
+            return resp.json()[&#39;result&#39;]
+        except KeyError:
+            print(&#39;TimeoutError&#39;)
+            exit(1)
+
+    def __chat_id_response(self) -&gt; int:
+        &#34;&#34;&#34;
+        Fetches the latest chat id from the client
+
+        Returns:
+            The latest chat-id of the client
+        Raises:
+            TimeoutError
+        &#34;&#34;&#34;
+        try:
+            fetch_updates = self.__get_updates()
+            return fetch_updates[0][&#39;message&#39;][&#39;chat&#39;][&#39;id&#39;]
+        except TimeoutError as tm_err:
+            print(tm_err)
+            exit(1)
+
+    def send_message(self, msg, notification=False) -&gt; object:
+        &#34;&#34;&#34;
+        Function to send message
+
+        Args:
+            msg (string): Enter the message to post
+            notification (bool): Disable_Notification (default=False)
+        Returns:
+            The status_code of the post operation (send_message)
+        Raises:
+            IndexError
+        &#34;&#34;&#34;
+        try:
+            method = &#39;sendMessage&#39;
+            params = {&#39;chat_id&#39;: self.__chat_id_response(), &#39;text&#39;: msg,
+                      &#39;parse_mode&#39;: &#39;HTML&#39;, &#39;disable_notification&#39;: notification}
+            return requests.post(self.api_url + method, params)
+        except IndexError:
+            print(&#39;Time out error&#39;)
+            exit(1)
+
+    def send_image(self, img_path) -&gt; object:
+        &#34;&#34;&#34;
+        Function to send image via telegram
+
+        Args:
+            img_path (basestring): Enter the file_path to send the image file
+        Returns:
+            The status_code of the post operation (send_image)
+        Raises:
+            FileNotFoundError, InvalidFormatError
+        &#34;&#34;&#34;
+        method = &#39;sendPhoto?&#39; + &#39;chat_id=&#39; + str(self.__chat_id_response())
+        if img_path[-4:] in [&#39;.jpg&#39;, &#39;.png&#39;]:
+            pass
+        else:
+            print(&#39;Invalid File Format, please use .jpg or .png format&#39;)
+            exit(1)
+        try:
+            files = {&#39;photo&#39;: open(img_path, &#39;rb&#39;)}
+            return requests.post(self.api_url + method, files = files)
+        except FileNotFoundError as fl_err:
+            print(fl_err)
+            exit(1)
+
+    def send_file(self, file_path) -&gt; object:
+        &#34;&#34;&#34;
+        Function to send documents via telegram
+
+        Args:
+            file_path (basestring): Enter the file_path to send the image file
+        Returns:
+            The status_code of the post operation (send_document)
+        Raises:
+            FileNotFoundError, TimeoutError
+        &#34;&#34;&#34;
+        method = &#39;sendDocument?&#39; + &#39;chat_id=&#39; + str(self.__chat_id_response())
+        try:
+            files = {&#39;document&#39;: open(file_path, &#39;rb&#39;)}
+            return requests.post(self.api_url + method, files = files)
+        except FileNotFoundError as fn_err:
+            print(fn_err)
+            exit(1)
+        except TimeoutError as tm_err:
+            print(tm_err)
+            exit(1)
+
+    def session_dump(self) -&gt; json:
+        &#34;&#34;&#34;
+        Function to Dump all the data from the telegram client during the current session
+
+        Returns:
+            Dumps the session details in the form of json file.
+        Raises:
+            IOError
+        &#34;&#34;&#34;
+        resp = self.__get_updates()
+        try:
+            if not os.path.exists(self.dirDownloads):
+                os.mkdir(self.dirDownloads)
+            local_path = os.path.join(self.dirDownloads, &#39;session_dump.json&#39;)
+
+            with open(local_path, &#39;w+&#39;, encoding=&#39;utf-8&#39;) as outfile:
+                json.dump(resp, outfile)
+        except IOError as io_err:
+            print(io_err)
+            exit(1)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="notifly.telegram.BotHandler"><code class="flex name class">
+<span>class <span class="ident">BotHandler</span></span>
+<span>(</span><span>token, dir_download='./downloads')</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Initialize the telegram client using tokens to access the HTTP API</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>token</code></strong> :&ensp;<code>string</code></dt>
+<dd>API token [Mandatory].</dd>
+</dl>
+<h2 id="args_1">Args</h2>
+<dl>
+<dt><strong><code>dir_download</code></strong> :&ensp;<code>string</code></dt>
+<dd>-&gt; Storage location for dumping payload [default = "./downloads"]</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class BotHandler:
+    def __init__(self, token, dir_download= &#39;./downloads&#39;):
+        &#34;&#34;&#34;
+        Initialize the telegram client using tokens to access the HTTP API
+
+        Args:
+            token (string): API token [Mandatory].
+        Args:
+            dir_download (string): -&gt; Storage location for dumping payload [default = &#34;./downloads&#34;]
+        &#34;&#34;&#34;
+        self.token = token
+        self.api_url = &#34;https://api.telegram.org/bot{}/&#34;.format(token)
+        self.file_url = &#34;https://api.telegram.org/file/bot{}/&#34;.format(token)
+        self.dirDownloads = dir_download
+
+    def __get_updates(self, offset=0, timeout=10):
+        &#34;&#34;&#34;
+        Get the latest updates as json file
+
+        Args:
+            offset (int): default value 0
+            timeout (int): Timeout for the request post (default value 10)
+        Returns:
+            The json results
+        Raises:
+            TimeoutError
+        &#34;&#34;&#34;
+        method = &#39;getUpdates&#39;
+        params = {&#39;timeout&#39;: timeout, &#39;offset&#39;: offset}
+        resp = requests.get(self.api_url + method, params)
+        try:
+            return resp.json()[&#39;result&#39;]
+        except KeyError:
+            print(&#39;TimeoutError&#39;)
+            exit(1)
+
+    def __chat_id_response(self) -&gt; int:
+        &#34;&#34;&#34;
+        Fetches the latest chat id from the client
+
+        Returns:
+            The latest chat-id of the client
+        Raises:
+            TimeoutError
+        &#34;&#34;&#34;
+        try:
+            fetch_updates = self.__get_updates()
+            return fetch_updates[0][&#39;message&#39;][&#39;chat&#39;][&#39;id&#39;]
+        except TimeoutError as tm_err:
+            print(tm_err)
+            exit(1)
+
+    def send_message(self, msg, notification=False) -&gt; object:
+        &#34;&#34;&#34;
+        Function to send message
+
+        Args:
+            msg (string): Enter the message to post
+            notification (bool): Disable_Notification (default=False)
+        Returns:
+            The status_code of the post operation (send_message)
+        Raises:
+            IndexError
+        &#34;&#34;&#34;
+        try:
+            method = &#39;sendMessage&#39;
+            params = {&#39;chat_id&#39;: self.__chat_id_response(), &#39;text&#39;: msg,
+                      &#39;parse_mode&#39;: &#39;HTML&#39;, &#39;disable_notification&#39;: notification}
+            return requests.post(self.api_url + method, params)
+        except IndexError:
+            print(&#39;Time out error&#39;)
+            exit(1)
+
+    def send_image(self, img_path) -&gt; object:
+        &#34;&#34;&#34;
+        Function to send image via telegram
+
+        Args:
+            img_path (basestring): Enter the file_path to send the image file
+        Returns:
+            The status_code of the post operation (send_image)
+        Raises:
+            FileNotFoundError, InvalidFormatError
+        &#34;&#34;&#34;
+        method = &#39;sendPhoto?&#39; + &#39;chat_id=&#39; + str(self.__chat_id_response())
+        if img_path[-4:] in [&#39;.jpg&#39;, &#39;.png&#39;]:
+            pass
+        else:
+            print(&#39;Invalid File Format, please use .jpg or .png format&#39;)
+            exit(1)
+        try:
+            files = {&#39;photo&#39;: open(img_path, &#39;rb&#39;)}
+            return requests.post(self.api_url + method, files = files)
+        except FileNotFoundError as fl_err:
+            print(fl_err)
+            exit(1)
+
+    def send_file(self, file_path) -&gt; object:
+        &#34;&#34;&#34;
+        Function to send documents via telegram
+
+        Args:
+            file_path (basestring): Enter the file_path to send the image file
+        Returns:
+            The status_code of the post operation (send_document)
+        Raises:
+            FileNotFoundError, TimeoutError
+        &#34;&#34;&#34;
+        method = &#39;sendDocument?&#39; + &#39;chat_id=&#39; + str(self.__chat_id_response())
+        try:
+            files = {&#39;document&#39;: open(file_path, &#39;rb&#39;)}
+            return requests.post(self.api_url + method, files = files)
+        except FileNotFoundError as fn_err:
+            print(fn_err)
+            exit(1)
+        except TimeoutError as tm_err:
+            print(tm_err)
+            exit(1)
+
+    def session_dump(self) -&gt; json:
+        &#34;&#34;&#34;
+        Function to Dump all the data from the telegram client during the current session
+
+        Returns:
+            Dumps the session details in the form of json file.
+        Raises:
+            IOError
+        &#34;&#34;&#34;
+        resp = self.__get_updates()
+        try:
+            if not os.path.exists(self.dirDownloads):
+                os.mkdir(self.dirDownloads)
+            local_path = os.path.join(self.dirDownloads, &#39;session_dump.json&#39;)
+
+            with open(local_path, &#39;w+&#39;, encoding=&#39;utf-8&#39;) as outfile:
+                json.dump(resp, outfile)
+        except IOError as io_err:
+            print(io_err)
+            exit(1)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="notifly.telegram.BotHandler.send_file"><code class="name flex">
+<span>def <span class="ident">send_file</span></span>(<span>self, file_path) ‑> object</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to send documents via telegram</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>file_path</code></strong> :&ensp;<code>basestring</code></dt>
+<dd>Enter the file_path to send the image file</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>The status_code of the post operation (send_document)</p>
+<h2 id="raises">Raises</h2>
+<p>FileNotFoundError, TimeoutError</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def send_file(self, file_path) -&gt; object:
+    &#34;&#34;&#34;
+    Function to send documents via telegram
+
+    Args:
+        file_path (basestring): Enter the file_path to send the image file
+    Returns:
+        The status_code of the post operation (send_document)
+    Raises:
+        FileNotFoundError, TimeoutError
+    &#34;&#34;&#34;
+    method = &#39;sendDocument?&#39; + &#39;chat_id=&#39; + str(self.__chat_id_response())
+    try:
+        files = {&#39;document&#39;: open(file_path, &#39;rb&#39;)}
+        return requests.post(self.api_url + method, files = files)
+    except FileNotFoundError as fn_err:
+        print(fn_err)
+        exit(1)
+    except TimeoutError as tm_err:
+        print(tm_err)
+        exit(1)</code></pre>
+</details>
+</dd>
+<dt id="notifly.telegram.BotHandler.send_image"><code class="name flex">
+<span>def <span class="ident">send_image</span></span>(<span>self, img_path) ‑> object</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to send image via telegram</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>img_path</code></strong> :&ensp;<code>basestring</code></dt>
+<dd>Enter the file_path to send the image file</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>The status_code of the post operation (send_image)</p>
+<h2 id="raises">Raises</h2>
+<p>FileNotFoundError, InvalidFormatError</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def send_image(self, img_path) -&gt; object:
+    &#34;&#34;&#34;
+    Function to send image via telegram
+
+    Args:
+        img_path (basestring): Enter the file_path to send the image file
+    Returns:
+        The status_code of the post operation (send_image)
+    Raises:
+        FileNotFoundError, InvalidFormatError
+    &#34;&#34;&#34;
+    method = &#39;sendPhoto?&#39; + &#39;chat_id=&#39; + str(self.__chat_id_response())
+    if img_path[-4:] in [&#39;.jpg&#39;, &#39;.png&#39;]:
+        pass
+    else:
+        print(&#39;Invalid File Format, please use .jpg or .png format&#39;)
+        exit(1)
+    try:
+        files = {&#39;photo&#39;: open(img_path, &#39;rb&#39;)}
+        return requests.post(self.api_url + method, files = files)
+    except FileNotFoundError as fl_err:
+        print(fl_err)
+        exit(1)</code></pre>
+</details>
+</dd>
+<dt id="notifly.telegram.BotHandler.send_message"><code class="name flex">
+<span>def <span class="ident">send_message</span></span>(<span>self, msg, notification=False) ‑> object</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to send message</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>msg</code></strong> :&ensp;<code>string</code></dt>
+<dd>Enter the message to post</dd>
+<dt><strong><code>notification</code></strong> :&ensp;<code>bool</code></dt>
+<dd>Disable_Notification (default=False)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>The status_code of the post operation (send_message)</p>
+<h2 id="raises">Raises</h2>
+<p>IndexError</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def send_message(self, msg, notification=False) -&gt; object:
+    &#34;&#34;&#34;
+    Function to send message
+
+    Args:
+        msg (string): Enter the message to post
+        notification (bool): Disable_Notification (default=False)
+    Returns:
+        The status_code of the post operation (send_message)
+    Raises:
+        IndexError
+    &#34;&#34;&#34;
+    try:
+        method = &#39;sendMessage&#39;
+        params = {&#39;chat_id&#39;: self.__chat_id_response(), &#39;text&#39;: msg,
+                  &#39;parse_mode&#39;: &#39;HTML&#39;, &#39;disable_notification&#39;: notification}
+        return requests.post(self.api_url + method, params)
+    except IndexError:
+        print(&#39;Time out error&#39;)
+        exit(1)</code></pre>
+</details>
+</dd>
+<dt id="notifly.telegram.BotHandler.session_dump"><code class="name flex">
+<span>def <span class="ident">session_dump</span></span>(<span>self) ‑> <module 'json' from 'c:\\users\\sanch\\appdata\\local\\programs\\python\\python37\\Lib\\json\\__init__.py'></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to Dump all the data from the telegram client during the current session</p>
+<h2 id="returns">Returns</h2>
+<p>Dumps the session details in the form of json file.</p>
+<h2 id="raises">Raises</h2>
+<p>IOError</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def session_dump(self) -&gt; json:
+    &#34;&#34;&#34;
+    Function to Dump all the data from the telegram client during the current session
+
+    Returns:
+        Dumps the session details in the form of json file.
+    Raises:
+        IOError
+    &#34;&#34;&#34;
+    resp = self.__get_updates()
+    try:
+        if not os.path.exists(self.dirDownloads):
+            os.mkdir(self.dirDownloads)
+        local_path = os.path.join(self.dirDownloads, &#39;session_dump.json&#39;)
+
+        with open(local_path, &#39;w+&#39;, encoding=&#39;utf-8&#39;) as outfile:
+            json.dump(resp, outfile)
+    except IOError as io_err:
+        print(io_err)
+        exit(1)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="notifly" href="index.html">notifly</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="notifly.telegram.BotHandler" href="#notifly.telegram.BotHandler">BotHandler</a></code></h4>
+<ul class="">
+<li><code><a title="notifly.telegram.BotHandler.send_file" href="#notifly.telegram.BotHandler.send_file">send_file</a></code></li>
+<li><code><a title="notifly.telegram.BotHandler.send_image" href="#notifly.telegram.BotHandler.send_image">send_image</a></code></li>
+<li><code><a title="notifly.telegram.BotHandler.send_message" href="#notifly.telegram.BotHandler.send_message">send_message</a></code></li>
+<li><code><a title="notifly.telegram.BotHandler.session_dump" href="#notifly.telegram.BotHandler.session_dump">session_dump</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.1</a>.</p>
+</footer>
+</body>
+</html>

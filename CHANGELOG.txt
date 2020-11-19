@@ -9,3 +9,9 @@ Change Log
 ------------------
 - Basic Fix and Major changes for Telegram module
 - Added Discord Bot feature
+
+1.2.0 (19/11/2020)
+------------------
+- Added Notification Handler for discord, slack
+- Added Wrapper for Tensorflow Callback
+- Minor Fixes

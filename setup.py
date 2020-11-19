@@ -16,13 +16,13 @@ with open("README.md", encoding="utf-8") as f:
  
 setup(
   name='notifly',
-  version='1.1.5',
-  description='Simple Bot Notifier',
+  version='1.2.0',
+  description='One Notification system for all platforms',
   long_description=read_file,
   long_description_content_type='text/markdown',
   url='https://github.com/rexdivakar/Telegram-Notifly',  
-  author='Divakar R',
-  author_email='rexdivakar@hotmail.com',
+  author='Divakar R', 'Sanchit Jain' ,
+  author_email='rexdivakar@hotmail.com', 'sanchitjain1996@gmail.com'
   license='MIT', 
   classifiers=classifiers,
   keywords='Bot Notification', 
