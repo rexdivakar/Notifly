@@ -2,6 +2,7 @@ from notifly import discord, telegram, slack
 import inspect
 import matplotlib.pyplot as plt
 import copy
+import psutil
 
 
 class TfNotifier:
@@ -17,6 +18,13 @@ class TfNotifier:
         else:
             print('Invalid Platform')
             exit(1)
+
+    @staticmethod
+    def get_hardware_stats():
+        cpu_usage = psutil.cpu_percent(interval=0.2)
+        mem_stats = psutil.virtual_memory()
+        ram_usage = round((mem_stats.used / mem_stats.total) * 100, 2)
+        return {'cpu': cpu_usage, 'ram': ram_usage}
 
     @staticmethod
     def plot_graph(history, current_epoch_logs):
@@ -108,7 +116,7 @@ class TfNotifier:
 
         return inner
 
-    def notify_on_epoch_begin(self, epoch_interval, graph_interval):
+    def notify_on_epoch_begin(self, epoch_interval, graph_interval, hardware_stats_interval):
 
         def inner(func_to_call):
             def wrapper(*args, **kwargs):
@@ -145,6 +153,12 @@ class TfNotifier:
                         message += " {}: {:.4f} ".format(k, v)
                     self.notifier.send_message(message)
 
+                # notify if current_epoch is divisible by hardware_stats_interval
+                if current_epoch % hardware_stats_interval == 0:
+                    hardware_stats = TfNotifier.get_hardware_stats()
+                    message = f"CPU Usage: {hardware_stats['cpu']}%, RAM Usage: {hardware_stats['ram']}%"
+                    self.notifier.send_message(message)
+
                 # notify graph if current_epoch is divisible by graph_interval
                 if current_epoch % graph_interval == 0:
                     history_copy = copy.deepcopy(model_instance.history.history)
@@ -160,7 +174,7 @@ class TfNotifier:
 
         return inner
 
-    def notify_on_epoch_end(self, epoch_interval, graph_interval):
+    def notify_on_epoch_end(self, epoch_interval, graph_interval, hardware_stats_interval):
 
         def inner(func_to_call):
             def wrapper(*args, **kwargs):
@@ -194,6 +208,12 @@ class TfNotifier:
                     message = f"epoch: {current_epoch} ended, got log keys:"
                     for k, v in current_epoch_logs.items():
                         message += " {}: {:.4f} ".format(k, v)
+                    self.notifier.send_message(message)
+
+                # notify if current_epoch is divisible by hardware_stats_interval
+                if current_epoch % hardware_stats_interval == 0:
+                    hardware_stats = TfNotifier.get_hardware_stats()
+                    message = f"CPU Usage: {hardware_stats['cpu']}%, RAM Usage: {hardware_stats['ram']}%"
                     self.notifier.send_message(message)
 
                 # notify graph if current_epoch is divisible by graph_interval

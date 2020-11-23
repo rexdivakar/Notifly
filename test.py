@@ -14,11 +14,11 @@ def test():
 
     class TestCallback(tf.keras.callbacks.Callback):
 
-        @notifier.notify_on_epoch_begin(epoch_interval=1, graph_interval=1)
+        @notifier.notify_on_epoch_begin(epoch_interval=1, graph_interval=1, hardware_stats_interval=1)
         def on_epoch_begin(self, epoch, logs=None):
             pass
 
-        @notifier.notify_on_epoch_end(epoch_interval=1, graph_interval=1)
+        @notifier.notify_on_epoch_end(epoch_interval=1, graph_interval=1, hardware_stats_interval=1)
         def on_epoch_end(self, epoch, logs=None):
             pass
 
