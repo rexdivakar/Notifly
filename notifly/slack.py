@@ -27,7 +27,7 @@ class Notifier:
             print(f"Got an error: {api_err.response['error']}")
             exit(1)
 
-    def send_message(self, msg) -> object:  #TODO  Add unicode check
+    def send_message(self, msg) -> object:
         """
         Function to post message to the slack channel.
 
