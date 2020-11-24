@@ -1,4 +1,4 @@
-from notifly import discord, telegram, slack
+from notifly import discord, telegram, slack, gpu_stats
 import inspect
 import matplotlib.pyplot as plt
 import copy
@@ -24,7 +24,17 @@ class TfNotifier:
         cpu_usage = psutil.cpu_percent(interval=0.2)
         mem_stats = psutil.virtual_memory()
         ram_usage = round((mem_stats.used / mem_stats.total) * 100, 2)
-        return {'cpu': cpu_usage, 'ram': ram_usage}
+        x = gpu_stats.gpu()
+        gpu_util = x[2]
+        tot_v_ram = x[3]
+        v_ram_used = x[4]
+        unused_vram = x[5]
+        driver_ver = x[6]
+        gpu_name = x[7]
+        gpu_temp = x[11]
+        return {'cpu': cpu_usage, 'ram': ram_usage, 'gpu_name': gpu_name, 'gpu_usage': gpu_util, 'gpu_temp': gpu_temp,
+                'total_available_memory': tot_v_ram, 'used_memory': v_ram_used, 'unused_memory': unused_vram,
+                'driver_version': driver_ver}
 
     @staticmethod
     def plot_graph(history, current_epoch_logs):
@@ -156,7 +166,9 @@ class TfNotifier:
                 # notify if current_epoch is divisible by hardware_stats_interval
                 if current_epoch % hardware_stats_interval == 0:
                     hardware_stats = TfNotifier.get_hardware_stats()
-                    message = f"CPU Usage: {hardware_stats['cpu']}%, RAM Usage: {hardware_stats['ram']}%"
+                    message = f"CPU Usage: {hardware_stats['cpu']}%, RAM Usage: {hardware_stats['ram']}%, " \
+                              f"GPU Usage: {hardware_stats['gpu_usage']}%, GPU Temp: {hardware_stats['gpu_temp']}, " \
+                              f"GPU Memory {hardware_stats['used_memory']}"
                     self.notifier.send_message(message)
 
                 # notify graph if current_epoch is divisible by graph_interval
@@ -213,7 +225,9 @@ class TfNotifier:
                 # notify if current_epoch is divisible by hardware_stats_interval
                 if current_epoch % hardware_stats_interval == 0:
                     hardware_stats = TfNotifier.get_hardware_stats()
-                    message = f"CPU Usage: {hardware_stats['cpu']}%, RAM Usage: {hardware_stats['ram']}%"
+                    message = f"CPU Usage: {hardware_stats['cpu']}%, RAM Usage: {hardware_stats['ram']}%, " \
+                              f"GPU Usage: {hardware_stats['gpu_usage']}%, GPU Temp: {hardware_stats['gpu_temp']}, " \
+                              f"GPU Memory {hardware_stats['used_memory']}"
                     self.notifier.send_message(message)
 
                 # notify graph if current_epoch is divisible by graph_interval
