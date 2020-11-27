@@ -4,6 +4,9 @@
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/notifly?color=green&style=for-the-badge&logo=github)
 ![Discord](https://img.shields.io/discord/760088481224851476?label=DISCORD&logo=discord&logoColor=green&style=for-the-badge)
 
+<br>
+
+[![HitCount](http://hits.dwyl.com/rexdivakar/notifly.svg)](http://hits.dwyl.com/rexdivakar/notifly)
 
 <p align="center">	<p align="center">
 <img src="https://raw.githubusercontent.com/rexdivakar/Notifly/main/.others/bot.png" width="200" alt="Logo">
