@@ -1,10 +1,11 @@
 """Discord API webhooks wrapper"""
 
 import requests
+from notifly.tf_notifier import TfNotifier
 from requests import exceptions
 
 
-class Notifier:
+class Notifier(TfNotifier):
 
     class __AuthError(Exception):
         """

@@ -3,9 +3,10 @@
 import json
 import os
 import requests
+from notifly.tf_notifier import TfNotifier
 
 
-class BotHandler:
+class Notifier(TfNotifier):
     def __init__(self, token, dir_download= './downloads'):
         """
         Initialize the telegram client using tokens to access the HTTP API

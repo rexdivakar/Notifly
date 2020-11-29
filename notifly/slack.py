@@ -1,12 +1,12 @@
 """Slack-API call wrapper"""
 
-
 import slack
 from slack.errors import SlackApiError
+from notifly.tf_notifier import TfNotifier
 
 
-class Notifier:
-    def __init__(self, token, channel = 'general'):
+class Notifier(TfNotifier):
+    def __init__(self, token, channel='general'):
         """
         Initialize the slack webclient instance using API.
 
@@ -18,7 +18,7 @@ class Notifier:
         Raises:
             SlackApiError.
         """
-        self.__client = slack.WebClient(token = token)
+        self.__client = slack.WebClient(token=token)
         self.__channel = channel
 
         try:
@@ -39,7 +39,7 @@ class Notifier:
             SlackApiError
         """
         try:
-            return self.__client.chat_postMessage(channel = self.__channel, text = msg)
+            return self.__client.chat_postMessage(channel=self.__channel, text=msg)
         except SlackApiError as api_err:
             print(f"Got an error: {api_err.response['error']}")
             exit(1)
@@ -56,6 +56,6 @@ class Notifier:
                 FileNotFoundError
         """
         try:
-            return self.__client.files_upload(file = file_path,  channels = self.__channel)
+            return self.__client.files_upload(file=file_path, channels=self.__channel)
         except FileNotFoundError as fl_err:
             print(fl_err)
