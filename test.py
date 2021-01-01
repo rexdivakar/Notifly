@@ -3,6 +3,9 @@ from notifly import tf_notifier
 import tensorflow as tf
 import os
 import pytest
+from dotenv import load_dotenv
+
+load_dotenv()
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
