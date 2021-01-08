@@ -8,6 +8,6 @@ labels: "bug"
 
 (A clear and concise description of what the bug is.)
 
-### Have you read the [Contributing Guidelines on Pull Requests](https://github.com/rexdivakar/Notifly/blob/main/CODE_OF_CONDUCT.md)?
+### Have you read the [Contributing Guidelines on Pull Requests](https://github.com/rexdivakar/Notifly/blob/main/CONTRIBUTING.md)?
 
 (Write your answer here.)
