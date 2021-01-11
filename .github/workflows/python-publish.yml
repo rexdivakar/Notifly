@@ -29,12 +29,3 @@ jobs:
       run: |
         python setup.py sdist bdist_wheel
         twine upload --verbose dist/*
-
-    - uses: sarisia/actions-status-discord@v1
-      with:
-        webhook: ${{ secrets.DISCORD_WEBHOOK }}
-        nodetail: true
-        title: New version of `software` is ready!
-        description: |
-          Version `1.2.3-alpha`
-          Click [here](https://pypi.org/project/notifly/) to download!
