@@ -19,7 +19,9 @@
     * [Slack](#slack)
 * [Contributing](#contributing)
 
+<img src="https://media.giphy.com/media/a0FuPjiLZev4c/giphy.gif" width="50%">
 ## About the package
+
 Simple Bots to push notifications during an event trigger. <br>
 
 [!["Telegram"](https://img.shields.io/badge/%20Telegram-%20.svg?longCache=true&logo=telegram&colorB=blue)](https://telegram.org/) 
@@ -32,7 +34,7 @@ wrapper to send message, images, files to the channel using API.
 ### Built With
 * [Python 3][1]
 
-## Prerequisites
+## Prerequisites 👇
 * Python<br>
 It is preinstalled in Ubuntu 20.04. To check the version use command :
 ```
@@ -53,6 +55,7 @@ pip3 install slackclient==2.9.3
 ```
 
 ## Install the package
+
 Run the following terminal commands to install the package on the given distros.
 * Termux :
 ```
@@ -76,9 +79,10 @@ sudo pacman -S python3-pip
 pip3 install notifly
 ```
 ***This may take a while depending on the network speed.***
+<img src="https://media.giphy.com/media/kdiLau77NE9Z8vxGSO/giphy.gif" width="50%">
 
 ## Working of the tool
-### Telegram
+### Telegram 
 To see how the tool works,
 1. Create the [telegram bot][2].
 2. Getting the bot API token
@@ -137,11 +141,21 @@ To see how the tool works,
     >git commit -m 'Add something'
 1. Push to the Branch
     >git push origin feature/mybranch
-1. Open a Pull Request<br><br>
+1. Open a Pull Request<br>
 Follow the given commands or use the amazing ***GitHub GUI***<br>
-**Happy Contributing**
 
-[contributors-shield]: https://img.shields.io/github/contributors/rexdivakar/Telegram-Notifly.svg?style=flat-square
+<img src="https://media.giphy.com/media/1xOe0qgiYLYWE6pkki/giphy.gif" width="50%">
+
+## Open-source Programs 👩‍💻
+#### `DWoC(Devscript Winter of Code)`
+
+Winter of Code is an open-source program envisioned by DevScript that helps understand the paradigm of Open Source contribution. It aims to bring students into the world of open source development and see the power of unified problem solving in real time.
+<img src="https://devscript.tech/woc/img/WOC-logo.png" width="40%">
+
+
+# **Happy Contributing** 
+
+[contributors-shield]:  https://img.shields.io/github/contributors/rexdivakar/Telegram-Notifly.svg?style=flat-square
 [contributors-url]: https://github.com/rexdivakar/Telegram-Notifly/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/rexdivakar/Telegram-Notifly.svg?style=flat-square
 [forks-url]: https://github.com/rexdivakar/Telegram-Notifly/network/members
