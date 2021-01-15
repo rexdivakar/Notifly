@@ -3,13 +3,16 @@ from notifly import discord
 import tensorflow as tf
 import os
 import pytest
+from dotenv import load_dotenv
+
+load_dotenv()
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 
 def test():
     ssl._create_default_https_context = ssl._create_unverified_context
-    token = r'https://discord.com/api/webhooks/771253998313144321/5FNBsAi8-exyc-3rxLOYudQdQqMdpcaCOqCh6z1IX4ledG1oGyaONeIY1HDUns6qBZhW'
+    token = os.getenv('TOKEN')
     notifier = discord.Notifier(token)
 
     class TestCallback(tf.keras.callbacks.Callback):
@@ -31,7 +34,6 @@ def test():
             pass
 
     fashion_mnist = tf.keras.datasets.fashion_mnist
-
     (train_images, train_labels), (_, _) = fashion_mnist.load_data()
 
     model = tf.keras.Sequential([
