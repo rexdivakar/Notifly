@@ -1,17 +1,14 @@
-# Documentation 📚
 
-## Give us any documentation related issue that will help us improve 
+name: 📚 Documentation
+about: Report an issue related to documentation
+labels: "documentation"
+---
 
+## 📚 Documentation
 
+(A clear and concise description of what the issue is.)
 
-**Is there any issue related to documentation? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+### Have you read the [Contributing Guidelines on Pull Requests](https://github.com/rexdivakar/Notifly/blob/main/CONTRIBUTING.md)?
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+(Write your answer here.)
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
-
-**Additional context**
-Add any other context or screenshots about the documentation here.
