@@ -62,9 +62,7 @@ class TfNotifier:
             def wrapper(*args, **kwargs):
 
                 # get parameter values
-                parameter_values = []
-                for i in args:
-                    parameter_values.append(i)
+                parameter_values = [i for i in args]
                 for i in kwargs.values():
                     parameter_values.append(i)
 
@@ -80,9 +78,7 @@ class TfNotifier:
 
                 self.send_message(f':muscle: training started, got log keys: {starting_logs}')
 
-                return_value = func_to_call(*args, **kwargs)
-
-                return return_value
+                return func_to_call(*args, **kwargs)
 
             return wrapper
 
@@ -94,9 +90,7 @@ class TfNotifier:
             def wrapper(*args, **kwargs):
 
                 # get parameter values
-                parameter_values = []
-                for i in args:
-                    parameter_values.append(i)
+                parameter_values = [i for i in args]
                 for i in kwargs.values():
                     parameter_values.append(i)
 
@@ -112,9 +106,7 @@ class TfNotifier:
 
                 self.send_message(f':tada: training ended, got log keys: {ending_logs}')
 
-                return_value = func_to_call(*args, **kwargs)
-
-                return return_value
+                return func_to_call(*args, **kwargs)
 
             return wrapper
 
@@ -126,9 +118,7 @@ class TfNotifier:
             def wrapper(*args, **kwargs):
 
                 # get parameter values
-                parameter_values = []
-                for i in args:
-                    parameter_values.append(i)
+                parameter_values = [i for i in args]
                 for i in kwargs.values():
                     parameter_values.append(i)
 
@@ -173,9 +163,7 @@ class TfNotifier:
                     # TODO: change this function call
                     self.send_file(file_path)
 
-                return_value = func_to_call(*args, **kwargs)
-
-                return return_value
+                return func_to_call(*args, **kwargs)
 
             return wrapper
 
@@ -187,9 +175,7 @@ class TfNotifier:
             def wrapper(*args, **kwargs):
 
                 # get parameter values
-                parameter_values = []
-                for i in args:
-                    parameter_values.append(i)
+                parameter_values = [i for i in args]
                 for i in kwargs.values():
                     parameter_values.append(i)
 
@@ -232,9 +218,7 @@ class TfNotifier:
                     # TODO: change this function call
                     self.send_file(file_path)
 
-                return_value = func_to_call(*args, **kwargs)
-
-                return return_value
+                return func_to_call(*args, **kwargs)
 
             return wrapper
 
