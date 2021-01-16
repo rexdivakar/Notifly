@@ -162,7 +162,8 @@ class TfNotifier:
                     hardware_stats = TfNotifier.get_hardware_stats()
                     message = f"CPU Usage: {hardware_stats['cpu']}%, RAM Usage: {hardware_stats['ram']}%, " \
                               f"GPU Usage: {hardware_stats['gpu_usage']}%, GPU Temp: {hardware_stats['gpu_temp']}, " \
-                              f"GPU Memory {hardware_stats['used_memory']}"
+                              f"GPU Memory {hardware_stats['used_memory']} MB", f"GPU Unused Memory " \
+                                                                                f"{hardware_stats['unused_memory']} MB"
                     self.send_message(message)
 
                 # notify graph if current_epoch is divisible by graph_interval
