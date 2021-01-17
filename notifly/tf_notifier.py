@@ -18,7 +18,9 @@ class TfNotifier:
         cpu_usage = psutil.cpu_percent(interval = 0.2)
         mem_stats = psutil.virtual_memory()
         ram_usage = round((mem_stats.used / mem_stats.total) * 100, 2)
+
         x = gpu_stats.gpu()
+
         if x is not None:
             gpu_util = x[2]
             tot_v_ram = x[3]
@@ -26,11 +28,9 @@ class TfNotifier:
             unused_vram = x[5]
             driver_ver = x[6]
             gpu_name = x[7]
-            gpu_temp = x[11]
-            return f"CPU Usage: {cpu_usage}%, RAM Usage: {ram_usage}%, " \
-                   f"GPU Usage: {gpu_util['gpu_usage']}%, GPU Temp: {gpu_temp['gpu_temp']}, " \
-                   f"GPU Memory {v_ram_used['used_memory']} MB", f"GPU Unused Memory " \
-                                                                 f"{unused_vram['unused_memory']} MB"
+            gpu_temp = x[11].strip()
+            return f"CPU Usage: {cpu_usage}%, RAM Usage: {ram_usage}%, GPU Usage: {gpu_util}%, GPU Temp: {gpu_temp}," \
+                   f" GPU Memory: {v_ram_used} MB, GPU Unused Memory: {unused_vram} MB"
         else:
             return f"CPU Usage: {cpu_usage}%, RAM Usage: {ram_usage}%"
 
@@ -130,7 +130,6 @@ class TfNotifier:
 
                 # parameter mapping with names to values
                 parameter_mapping = dict(zip(parameter_names, parameter_values))
-                print(parameter_mapping)
 
                 # get model instance
                 model_instance = parameter_mapping.get('self').model
@@ -140,7 +139,6 @@ class TfNotifier:
 
                 # get current epoch logs
                 current_epoch_logs = parameter_mapping.get('logs')
-                print(current_epoch_logs)
 
                 # notify if current_epoch is divisible by epoch_interval
                 if current_epoch % epoch_interval == 0:
@@ -183,7 +181,6 @@ class TfNotifier:
 
                 # parameter mapping with names to values
                 parameter_mapping = dict(zip(parameter_names, parameter_values))
-                print(parameter_mapping)
 
                 # get model instance
                 model_instance = parameter_mapping.get('self').model
@@ -204,10 +201,7 @@ class TfNotifier:
                 # notify if current_epoch is divisible by hardware_stats_interval
                 if current_epoch % hardware_stats_interval == 0:
                     hardware_stats = TfNotifier.get_hardware_stats()
-                    message = f"CPU Usage: {hardware_stats['cpu']}%, RAM Usage: {hardware_stats['ram']}%, " \
-                              f"GPU Usage: {hardware_stats['gpu_usage']}%, GPU Temp: {hardware_stats['gpu_temp']}, " \
-                              f"GPU Memory {hardware_stats['used_memory']}"
-                    self.send_message(message)
+                    self.send_message(hardware_stats)
 
                 # notify graph if current_epoch is divisible by graph_interval
                 if current_epoch % graph_interval == 0:

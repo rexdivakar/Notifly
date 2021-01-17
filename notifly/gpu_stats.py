@@ -11,7 +11,6 @@ def gpu():
             nvidia_smi = spawn.find_executable('nvidia-smi')
         except FileNotFoundError as fn:
             print(fn)
-            sys.exit(1)
 
         if nvidia_smi is None:
             nvidia_smi = "%s\\Program Files\\NVIDIA Corporation\\NVSMI\\nvidia-smi.exe" % os.environ['systemdrive']
@@ -35,4 +34,4 @@ def gpu():
         print('Unable to establish a communication with GPU', stderr)
         sys.exit(1)
     except FileNotFoundError as fn:
-        print('Unable to find GPU connection in your device, Proceeding using CPU instance ')
+        print('Unable to find GPU connection in your device, Proceeding using CPU instance')
