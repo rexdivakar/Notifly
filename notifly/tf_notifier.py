@@ -27,12 +27,12 @@ class TfNotifier:
             driver_ver = x[6]
             gpu_name = x[7]
             gpu_temp = x[11]
-            return f"CPU Usage: {cpu_usage['cpu']}%, RAM Usage: {mem_stats['ram']}%, " \
+            return f"CPU Usage: {cpu_usage}%, RAM Usage: {ram_usage}%, " \
                    f"GPU Usage: {gpu_util['gpu_usage']}%, GPU Temp: {gpu_temp['gpu_temp']}, " \
                    f"GPU Memory {v_ram_used['used_memory']} MB", f"GPU Unused Memory " \
                                                                  f"{unused_vram['unused_memory']} MB"
         else:
-            return f"CPU Usage: {cpu_usage['cpu']}%, RAM Usage: {mem_stats['ram']}%"
+            return f"CPU Usage: {cpu_usage}%, RAM Usage: {ram_usage}%"
 
     @staticmethod
     def plot_graph(history, current_epoch_logs):
