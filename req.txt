@@ -2,3 +2,4 @@ tensorflow
 matplotlib
 slackclient
 python-dotenv
+psutil

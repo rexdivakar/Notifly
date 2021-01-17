@@ -1,5 +1,5 @@
 import ssl
-from notifly import tf_notifier
+from notifly import discord
 import tensorflow as tf
 import os
 import pytest
@@ -13,15 +13,15 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 def test():
     ssl._create_default_https_context = ssl._create_unverified_context
     token = os.getenv('TOKEN')
-    notifier = tf_notifier.TfNotifier(token=token, platform='discord')
+    notifier = discord.Notifier(token)
 
     class TestCallback(tf.keras.callbacks.Callback):
 
-        @notifier.notify_on_epoch_begin(epoch_interval=1, graph_interval=1)
+        @notifier.notify_on_epoch_begin(epoch_interval=1, graph_interval=1, hardware_stats_interval=1)
         def on_epoch_begin(self, epoch, logs=None):
             pass
 
-        @notifier.notify_on_epoch_end(epoch_interval=1, graph_interval=1)
+        @notifier.notify_on_epoch_end(epoch_interval=1, graph_interval=1, hardware_stats_interval=1)
         def on_epoch_end(self, epoch, logs=None):
             pass
 
