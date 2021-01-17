@@ -16,8 +16,8 @@ with open("README.md", encoding="utf-8") as f:
  
 setup(
   name='notifly',
-  version='1.2.0',
-  description='One Notification system for all platforms',
+  version='1.3.0',
+  description='Notification on the fly !',
   long_description=read_file,
   long_description_content_type='text/markdown',
   url='https://github.com/rexdivakar/Telegram-Notifly',  
@@ -27,5 +27,5 @@ setup(
   classifiers=classifiers,
   keywords='Bot Notification', 
   packages=['notifly'],
-  install_requires=['requests', 'numpy==1.19.3', 'matplotlib', 'slackclient']
+  install_requires=['requests', 'numpy==1.19.3', 'matplotlib', 'slackclient', 'python-dotenv', 'psutil']
 )
