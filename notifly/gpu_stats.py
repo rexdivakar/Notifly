@@ -26,12 +26,13 @@ def gpu():
                    "gpu_serial,display_active,display_mode,temperature.gpu",
                    "--format=csv,noheader,nounits"], stdout = PIPE)
         stdout, stderr = p.communicate()
-        return stdout.decode('UTF-8').split(',')
+        if p is not None:
+            return stdout.decode('UTF-8').split(',')
+        else:
+            print('No Gpu Found')
 
     except SystemError as stderr:
         print('Unable to establish a communication with GPU', stderr)
         sys.exit(1)
     except FileNotFoundError as fn:
         print('Unable to find GPU connection in your device, Proceeding using CPU instance ')
-
-
