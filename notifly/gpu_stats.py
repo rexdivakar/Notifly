@@ -33,8 +33,7 @@ def gpu():
         stdout, stderr = p.communicate()
         if p is not None:
             return stdout.decode('UTF-8').split(',')
-        else:
-            print('No Gpu Found')
+        print('No Gpu Found')
 
     except SystemError as stderr:
         print('Unable to establish a communication with GPU', stderr)

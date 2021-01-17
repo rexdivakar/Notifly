@@ -2,6 +2,7 @@
 
 import json
 import os
+import sys
 import requests
 from notifly.tf_notifier import TfNotifier
 
@@ -40,7 +41,7 @@ class Notifier(TfNotifier):
             return resp.json()['result']
         except KeyError:
             print('TimeoutError')
-            exit(1)
+            sys.exit(1)
 
     def __chat_id_response(self) -> int:
         """
@@ -56,7 +57,7 @@ class Notifier(TfNotifier):
             return fetch_updates[0]['message']['chat']['id']
         except TimeoutError as tm_err:
             print(tm_err)
-            exit(1)
+            sys.exit(1)
 
     def send_message(self, msg, notification=False) -> object:
         """
@@ -77,7 +78,7 @@ class Notifier(TfNotifier):
             return requests.post(self.api_url + method, params)
         except IndexError:
             print('Time out error')
-            exit(1)
+            sys.exit(1)
 
     def send_image(self, img_path) -> object:
         """
@@ -93,13 +94,13 @@ class Notifier(TfNotifier):
         method = 'sendPhoto?' + 'chat_id=' + str(self.__chat_id_response())
         if img_path[-4:] not in ['.jpg', '.png']:
             print('Invalid File Format, please use .jpg or .png format')
-            exit(1)
+            sys.exit(1)
         try:
             files = {'photo': open(img_path, 'rb')}
             return requests.post(self.api_url + method, files = files)
         except FileNotFoundError as fl_err:
             print(fl_err)
-            exit(1)
+            sys.exit(1)
 
     def send_file(self, file_path) -> object:
         """
@@ -118,10 +119,10 @@ class Notifier(TfNotifier):
             return requests.post(self.api_url + method, files = files)
         except FileNotFoundError as fn_err:
             print(fn_err)
-            exit(1)
+            sys.exit(1)
         except TimeoutError as tm_err:
             print(tm_err)
-            exit(1)
+            sys.exit(1)
 
     def session_dump(self) -> json:
         """
@@ -142,4 +143,4 @@ class Notifier(TfNotifier):
                 json.dump(resp, outfile)
         except IOError as io_err:
             print(io_err)
-            exit(1)
+            sys.exit(1)
