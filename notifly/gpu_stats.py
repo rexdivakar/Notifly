@@ -6,6 +6,12 @@ import platform
 
 
 def gpu():
+    """
+    Monitors the hardware info on the runtime.
+
+    Returns:
+        The list of parameters containing hardware info
+    """
     if platform.system() == "Windows":
         try:
             nvidia_smi = spawn.find_executable('nvidia-smi')
