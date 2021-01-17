@@ -1,10 +1,11 @@
 """Discord API webhooks wrapper"""
 
 import requests
+from notifly.tf_notifier import TfNotifier
 from requests import exceptions
 
 
-class Notifier:
+class Notifier(TfNotifier):
 
     class __AuthError(Exception):
         """
@@ -30,7 +31,8 @@ class Notifier:
             if requests.get(self.__webhooks).status_code == 401:
                 raise Notifier.__AuthError('Invalid Webhook')
         except exceptions.ConnectionError as err:
-            print(err)
+            print('HTTPS Connection Error - Unable to reach the destination')
+            exit(1)
         except Notifier.__AuthError as ty_err:
             print(ty_err)
             exit(1)

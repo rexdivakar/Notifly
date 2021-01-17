@@ -3,9 +3,10 @@
 import json
 import os
 import requests
+from notifly.tf_notifier import TfNotifier
 
 
-class BotHandler:
+class Notifier(TfNotifier):
     def __init__(self, token, dir_download= './downloads'):
         """
         Initialize the telegram client using tokens to access the HTTP API
@@ -90,9 +91,7 @@ class BotHandler:
             FileNotFoundError, InvalidFormatError
         """
         method = 'sendPhoto?' + 'chat_id=' + str(self.__chat_id_response())
-        if img_path[-4:] in ['.jpg', '.png']:
-            pass
-        else:
+        if img_path[-4:] not in ['.jpg', '.png']:
             print('Invalid File Format, please use .jpg or .png format')
             exit(1)
         try:

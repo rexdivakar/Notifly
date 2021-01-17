@@ -89,7 +89,7 @@ To see how the tool works,
    1. Copy and use in sample code.
    ```python
    from notifly import telegram        #import the package    
-   x = telegram.BotHandler('bot API token')        #create object of class BotHandler
+   x = telegram.Notifier('bot API token')        #create object of class Notifier
    x.send_message('message')       #send message
    x.send_image("image address")        #send image(.jpg or .png format)
    x.send_document("file address")     #send document
@@ -102,7 +102,7 @@ To see how the tool works,
 2. Create and copy server [webhook][5] and use in sample code.
    ```python
    from notifly import discord
-   x = discord.Notifier(r'webhook')       #create object of class Notiflier
+   x = discord.Notifier(r'webhook')       #create object of class Notifier
    x.send_message('message')      #send message
    x.send_file("file address")        #send file
    x.send_file("image address")       #send image
@@ -129,6 +129,34 @@ To see how the tool works,
    x.send_file("image or file address")      #send image/file
    ```
 3. Run sample code.
+
+### Tensorflow Integration
+Plug and play feature for your tensorflow callbacks
+```python
+# create your notifier using above methods
+from notifly import discord
+notifier = discord.Notifier(r'webhook') 
+class MyNotifierCallback:
+
+    @notifier.notify_on_epoch_begin(epoch_interval=1, graph_interval=1, hardware_stats_interval=1)
+    def on_epoch_begin(self, epoch, logs=None):
+        pass
+
+    @notifier.notify_on_epoch_end(epoch_interval=1, graph_interval=1, hardware_stats_interval=1)
+    def on_epoch_end(self, epoch, logs=None):
+        pass
+
+    @notifier.notify_on_train_begin()
+    def on_train_begin(self, logs=None):
+        pass
+
+    @notifier.notify_on_train_end()
+    def on_train_end(self, logs=None):
+        pass
+
+model.fit(callbacks=[MyNotifierCallback()])
+```
+
 ## Contributing
 1. Fork the Project
 1. Create your Feature Branch 
