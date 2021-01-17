@@ -21,18 +21,18 @@ class TfNotifier:
 
         x = gpu_stats.gpu()
 
-        if x is not None:
-            gpu_util = x[2]
-            tot_v_ram = x[3]
-            v_ram_used = x[4]
-            unused_vram = x[5]
-            driver_ver = x[6]
-            gpu_name = x[7]
-            gpu_temp = x[11].strip()
-            return f"CPU Usage: {cpu_usage}%, RAM Usage: {ram_usage}%, GPU Usage: {gpu_util}%, GPU Temp: {gpu_temp}," \
-                   f" GPU Memory: {v_ram_used} MB, GPU Unused Memory: {unused_vram} MB"
-        else:
+        if x is None:
             return f"CPU Usage: {cpu_usage}%, RAM Usage: {ram_usage}%"
+
+        gpu_util = x[2]
+        tot_v_ram = x[3]
+        v_ram_used = x[4]
+        unused_vram = x[5]
+        driver_ver = x[6]
+        gpu_name = x[7]
+        gpu_temp = x[11].strip()
+        return f"CPU Usage: {cpu_usage}%, RAM Usage: {ram_usage}%, GPU Usage: {gpu_util}%, GPU Temp: {gpu_temp}," \
+               f" GPU Memory: {v_ram_used} MB, GPU Unused Memory: {unused_vram} MB"
 
     @staticmethod
     def plot_graph(history, current_epoch_logs):
