@@ -15,12 +15,22 @@ class TfNotifier:
 
     @staticmethod
     def get_hardware_stats():
-        cpu_usage = psutil.cpu_percent(interval = 0.2)
-        mem_stats = psutil.virtual_memory()
-        ram_usage = round((mem_stats.used / mem_stats.total) * 100, 2)
+        """
+        Fetches the hardware stats on regular intervals
+
+        Returns:
+            The parameters of CPU, GPU, RAM
+        Raises:
+            Exception
+        """
+        try:
+            cpu_usage = psutil.cpu_percent(interval = 0.2)
+            mem_stats = psutil.virtual_memory()
+            ram_usage = round((mem_stats.used / mem_stats.total) * 100, 2)
+        except Exception as e:
+            print('Unable to find system parameters', e)
 
         x = gpu_stats.gpu()
-
         if x is None:
             return f"CPU Usage: {cpu_usage}%, RAM Usage: {ram_usage}%"
 
@@ -36,6 +46,15 @@ class TfNotifier:
 
     @staticmethod
     def plot_graph(history, current_epoch_logs):
+        """
+        Plots the graphs on runtime
+
+        Args:
+            history (dict): gets the logs of the tensorflow model.train()
+            current_epoch_logs (int): Fetches the epochs on runtime event
+        Returns:
+            Plots the graph on runtime
+        """
 
         # merge history with current epoch logs
         for key, value in current_epoch_logs.items():
@@ -61,6 +80,12 @@ class TfNotifier:
         return file_path
 
     def notify_on_train_begin(self):
+        """
+        Decorator which runs on beginning of the training model.
+
+        Returns:
+            Updated function
+        """
 
         def inner(func_to_call):
             def wrapper(*args, **kwargs):
@@ -88,7 +113,12 @@ class TfNotifier:
         return inner
 
     def notify_on_train_end(self):
+        """
+        Decorator which runs on end of each iteration during training model.
 
+        Returns:
+            Updated function
+        """
         def inner(func_to_call):
             def wrapper(*args, **kwargs):
                 # get parameter values
@@ -115,7 +145,12 @@ class TfNotifier:
         return inner
 
     def notify_on_epoch_begin(self, epoch_interval, graph_interval, hardware_stats_interval):
+        """
+        Decorator which runs on beginning of the training model.
 
+        Returns:
+            Updated function
+        """
         def inner(func_to_call):
             def wrapper(*args, **kwargs):
 
@@ -166,7 +201,12 @@ class TfNotifier:
         return inner
 
     def notify_on_epoch_end(self, epoch_interval, graph_interval, hardware_stats_interval):
+        """
+        Decorator which runs on end of the training model.
 
+        Returns:
+            Updated function
+        """
         def inner(func_to_call):
             def wrapper(*args, **kwargs):
 
