@@ -90,7 +90,7 @@ class TfNotifier:
         def inner(func_to_call):
             def wrapper(*args, **kwargs):
                 # get parameter values
-                parameter_values = [i for i in args]
+                parameter_values = list(args)
                 for i in kwargs.values():
                     parameter_values.append(i)
 
@@ -122,7 +122,7 @@ class TfNotifier:
         def inner(func_to_call):
             def wrapper(*args, **kwargs):
                 # get parameter values
-                parameter_values = [i for i in args]
+                parameter_values = list(args)
                 for i in kwargs.values():
                     parameter_values.append(i)
 
@@ -155,7 +155,7 @@ class TfNotifier:
             def wrapper(*args, **kwargs):
 
                 # get parameter values
-                parameter_values = [i for i in args]
+                parameter_values = list(args)
                 for i in kwargs.values():
                     parameter_values.append(i)
 
@@ -211,7 +211,7 @@ class TfNotifier:
             def wrapper(*args, **kwargs):
 
                 # get parameter values
-                parameter_values = [i for i in args]
+                parameter_values = list(args)
                 for i in kwargs.values():
                     parameter_values.append(i)
 
