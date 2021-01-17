@@ -1,6 +1,5 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 from os import path
-import os.path
 
 classifiers = [
   'Development Status :: 5 - Production/Stable',

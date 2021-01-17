@@ -2,7 +2,6 @@ import ssl
 from notifly import discord
 import tensorflow as tf
 import os
-import pytest
 from dotenv import load_dotenv
 
 load_dotenv()
