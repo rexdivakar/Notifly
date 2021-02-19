@@ -32,8 +32,10 @@ def gpu():
                    "--format=csv,noheader,nounits"], stdout = PIPE)
         stdout, stderr = p.communicate()
         if p is not None:
-            return stdout.decode('UTF-8').split(',')
-        print('No Gpu Found')
+            x = stdout.decode('UTF-8').split(',')
+            if len(x) <= 1:
+                print('No Gpu Found, continuing with CPU instance')
+                return None
 
     except SystemError as stderr:
         print('Unable to establish a communication with GPU', stderr)
