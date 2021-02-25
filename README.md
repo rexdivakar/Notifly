@@ -156,6 +156,8 @@ class MyNotifierCallback:
 
 model.fit(callbacks=[MyNotifierCallback()])
 ```
+## Learn more about Notifly ✨
+Read the [wiki pages](https://github.com/rexdivakar/Notifly/wiki) which has all the above steps in great detail with some examples as well 🤩🎉.
 
 ## Contributing
 1. Fork the Project
