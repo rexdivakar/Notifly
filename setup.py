@@ -15,7 +15,7 @@ with open("README.md", encoding="utf-8") as f:
  
 setup(
   name='notifly',
-  version='1.3.0',
+  version='1.3.1',
   description='Notification on the fly !',
   long_description=read_file,
   long_description_content_type='text/markdown',
