@@ -3,8 +3,7 @@ from notifly import tf_notifier
 import tensorflow as tf
 
 ssl._create_default_https_context = ssl._create_unverified_context
-token = 'https://discord.com/api/webhooks/771253998313144321/5FNBsAi8-exyc-3rx' \
-        'LOYudQdQqMdpcaCOqCh6z1IX4ledG1oGyaONeIY1HDUns6qBZhW'
+token = 'https://discord.com/api/webhooks/885143691201773578/dJgoeeuYqhhCoBNC5nX5ZMBAlx05hKkXVAgSWrSUk-rPc-c7P4n0DL98yGdHwHbERnj4'
 notifier = tf_notifier.TfNotifier(token=token, platform='discord')
 
 
