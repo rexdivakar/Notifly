@@ -42,6 +42,8 @@ class Notifier(TfNotifier):
         except KeyError:
             print('TimeoutError')
             sys.exit(1)
+        except requests.exceptions.ConnectionError as err:
+            print('HTTPS Connection Error - Unable to reach the destination')
 
     def __chat_id_response(self) -> int:
         """
@@ -79,6 +81,9 @@ class Notifier(TfNotifier):
         except IndexError:
             print('Time out error')
             sys.exit(1)
+        except requests.exceptions.ConnectionError as err:
+            print('HTTPS Connection Error - Unable to reach the destination')
+            sys.exit(1)
 
     def send_image(self, img_path) -> object:
         """
@@ -101,6 +106,9 @@ class Notifier(TfNotifier):
         except FileNotFoundError as fl_err:
             print(fl_err)
             sys.exit(1)
+        except requests.exceptions.ConnectionError as err:
+            print('HTTPS Connection Error - Unable to reach the destination')
+            sys.exit(1)
 
     def send_file(self, file_path) -> object:
         """
@@ -122,6 +130,9 @@ class Notifier(TfNotifier):
             sys.exit(1)
         except TimeoutError as tm_err:
             print(tm_err)
+            sys.exit(1)
+        except requests.exceptions.ConnectionError as err:
+            print('HTTPS Connection Error - Unable to reach the destination')
             sys.exit(1)
 
     def session_dump(self) -> json:
