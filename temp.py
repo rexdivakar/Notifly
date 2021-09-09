@@ -2,6 +2,8 @@ import ssl
 from notifly import tf_notifier
 import tensorflow as tf
 from dotenv import load_dotenv
+import os
+
 
 load_dotenv()
 
