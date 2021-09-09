@@ -1,9 +1,12 @@
 import ssl
 from notifly import tf_notifier
 import tensorflow as tf
+from dotenv import load_dotenv
+
+load_dotenv()
 
 ssl._create_default_https_context = ssl._create_unverified_context
-token = {DISCORD_TOKEN}
+token = os.getenv('TOKEN')
 notifier = tf_notifier.TfNotifier(token=token, platform='discord')
 
 
