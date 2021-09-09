@@ -92,7 +92,7 @@ To see how the tool works,
    x = telegram.Notifier('bot API token')        #create object of class Notifier
    x.send_message('message')       #send message
    x.send_image("image address")        #send image(.jpg or .png format)
-   x.send_document("file address")     #send document
+   x.send_file("file address")     #send document
    x.session_dump()        #creates folder named 'downloads' in local folder, downloads/saves message,chat details for current session in 'sessio_dump.json' file
     ```
 3. Run sample code.

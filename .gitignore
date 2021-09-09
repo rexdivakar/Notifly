@@ -1,6 +1,7 @@
+ 
 # Created by .ignore support plugin (hsz.mobi)
 .idea
 !/temp.py
 .vscode
 test.py
-
+__pycache__/
