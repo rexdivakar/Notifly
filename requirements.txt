@@ -1,5 +1,5 @@
 requests==2.24.0
-numpy==1.19.3
+numpy==1.22.2
 matplotlib==3.2.2
 slackclient==2.9.3
 psutil==5.7.3
