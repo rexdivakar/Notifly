@@ -1,4 +1,4 @@
-requests==2.24.0
+requests==2.31.0
 numpy==1.22.2
 matplotlib==3.2.2
 slackclient==2.9.3
