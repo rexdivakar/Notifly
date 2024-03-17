@@ -1,5 +1,5 @@
 from setuptools import setup
-from os import path
+from pathlib import Path
 
 classifiers = [
   'Development Status :: 5 - Production/Stable',
@@ -10,14 +10,13 @@ classifiers = [
 ]
 
 # Get the long description from the README file
-with open("README.md", encoding="utf-8") as f:
-    read_file = f.read()
- 
+long_description = Path("README.md").read_text(encoding="utf-8")
+
 setup(
   name='notifly',
   version='1.3.2',
   description='Notification on the fly !',
-  long_description=read_file,
+  long_description=long_description,
   long_description_content_type='text/markdown',
   url='https://github.com/rexdivakar/Telegram-Notifly',
   author='Divakar R, Sanchit Jain',
