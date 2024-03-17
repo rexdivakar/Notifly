@@ -31,3 +31,7 @@ Change Log
 ------------------
 - Resolved Buffer Overflow in NumPy Package (CVE-2021-33430)
 - Updated Wiki pages
+
+1.3.3 (17/02/2024)
+------------------
+- Upgraded the package version to support latest python 3.11 and above
