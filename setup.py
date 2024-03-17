@@ -14,7 +14,7 @@ long_description = Path("README.md").read_text(encoding="utf-8")
 
 setup(
   name='notifly',
-  version='1.3.2',
+  version='1.3.3',
   description='Notification on the fly !',
   long_description=long_description,
   long_description_content_type='text/markdown',
